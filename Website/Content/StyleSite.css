@@ -1,0 +1,12 @@
+/*navigation bar top*/
+.navigation {
+    background-image: linear-gradient(to bottom, #3c3c3c 0%, RGBA(33, 191, 180, 0.65) 100%);
+}
+
+/*.navigation-links {
+    color: #FFF;
+}
+
+.navigation-links:focus {
+    color: #D8FFE8;
+}*/
