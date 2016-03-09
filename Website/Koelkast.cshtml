@@ -9,13 +9,21 @@
     
     var db = Database.Open("StarterSite");
     var selectedData=db.Query("SELECT Product, Aantal FROM Product");
-    var grid = new WebGrid(source: selectedData);
+    var grid = new WebGrid(source: selectedData, rowsPerPage: 20);
 }
 
 
 <hgroup class="title">
     <h1>@Page.Title</h1>
 </hgroup>
+
+<form method="get">
+  <div>
+    <label for="searchProduct">Zoek product:</label>
+    <input type="text" name="searchProduct" value="" />
+    <input type="Submit" value="Search Product" /><br/>
+    </div>
+</form>
 
 <div> 
 @grid.GetHtml(
