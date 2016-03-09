@@ -8,6 +8,11 @@
     Layout = "~/_SiteLayout.cshtml";
     Page.Title = "Register";
 
+    int Koelkastnr = 0;
+    Random random = new Random ();
+    var randomnumber = random.Next(100000,999999);
+    Koelkastnr = randomnumber;
+
     // Initialize general page variables
     var email = "";
     var password = "";
@@ -46,6 +51,7 @@
             if (user == null) {
                 // Insert email into the profile table
                 db.Execute("INSERT INTO UserProfile (Email) VALUES (@0)", email);
+                db.Execute("UPDATE UserProfile SET Koelkastnr = @0 WHERE Email = @1", Koelkastnr, email);
 
                 // Create and associate a new entry in the membership database.
                 // If successful, continue processing the request

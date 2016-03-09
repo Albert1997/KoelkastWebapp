@@ -6,54 +6,32 @@
 
     Layout = "~/_SiteLayout.cshtml";
     Page.Title = "Koelkast";
+    
+    var db = Database.Open("StarterSite");
+    var selectedData=db.Query("SELECT Product, Aantal FROM Product");
+    var grid = new WebGrid(source: selectedData);
 }
 
 
 <hgroup class="title">
-    <h1>@Page.Title.</h1>
-    <h2>Koelkast</h2>
+    <h1>@Page.Title</h1>
 </hgroup>
 
-<section class="contact">
-    <header>
-        <h3>Phone:</h3>
-    </header>
-    <p>
-        <span class="label">Main:</span>
-        <span>425.555.0100</span>
-    </p>
-    <p>
-        <span class="label">After Hours:</span>
-        <span>425.555.0199</span>
-    </p>
-</section>
+<div> 
+@grid.GetHtml(
+    tableStyle: "grid",
+    headerStyle: "head",
+    alternatingRowStyle: "alt",
+    columns: grid.Columns(
+    grid.Column("Product"),
+    grid.Column("Aantal")
+    )
+  )
+</div>
 
-
-
-<section class="contact">
-    <header>
-        <h3>Email:</h3>
-    </header>
-    <p>
-        <span class="label">Support:</span>
-        <span><a href="mailto:Support@example.com">Support@example.com</a></span>
-    </p>
-    <p>
-        <span class="label">Marketing:</span>
-        <span><a href="mailto:Marketing@example.com">Marketing@example.com</a></span>
-    </p>
-    <p>
-        <span class="label">General:</span>
-        <span><a href="mailto:General@example.com">General@example.com</a></span>
-    </p>
-</section>
-
-<section class="contact">
-    <header>
-        <h3>Address:</h3>
-    </header>
-    <p>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399
-    </p>
-</section>
+<style type="text/css">
+  .grid { margin: 4px; border-collapse: collapse; width: 600px; }
+  .grid th, .grid td { border: 1px solid #C0C0C0; padding: 5px; }
+  .head { background-color: #E8E8E8; font-weight: bold; color: #FFF; }
+  .alt { background-color: #E8E8E8; color: #000; }
+</style> 
