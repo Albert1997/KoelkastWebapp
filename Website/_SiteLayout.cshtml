@@ -17,7 +17,7 @@
 </head>
 <body>
     @*@functions.IsEmail("j@j.com")*@
-    <nav class="navbar navbar-inverse navbar-static-top navigation">
+    <nav class="navbar navbar-inverse .navbar-fixed-top navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -28,6 +28,8 @@
                 </button>
                 <a class="navbar-brand navigation-links" href="#">@App.Name</a>
             </div>
+
+
 
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navigation-links">
@@ -68,6 +70,7 @@
         </div>
     </nav>
     <div class="container">
+       <img src="~/Images/Koelkast-HomePage.jpg" alt="koelkast"></img>
         @RenderSection("featured", required: false)
         @RenderBody()
     </div>
