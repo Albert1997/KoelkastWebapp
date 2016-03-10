@@ -10,6 +10,8 @@
     var db = Database.Open("StarterSite");
     var selectedData=db.Query("SELECT * FROM Product");
     var grid = new WebGrid(source: selectedData, rowsPerPage: 20);
+    var Kaas = db.QueryValue("SELECT Afbeelding FROM Product");
+    string Kaasimg = "<img src= "~/Images/Productafbeeldingen/@Kaas" alt ="Kaas"></img>";
 }
 
 
@@ -24,7 +26,9 @@
     <input type="Submit" value="Search Product" /><br/>
     </div>
 </form>
-
+<div>
+ <img src="~/Images/Productafbeeldingen/@Kaas"alt ="Kaas"></img>
+</div>
 <div> 
 @grid.GetHtml(
     tableStyle: "grid",
