@@ -2,7 +2,35 @@
 .navigation {
     background-image: linear-gradient(to bottom, #3c3c3c 0%, RGBA(33, 191, 180, 0.65) 100%);
 }
+.content-body {
+    margin-top: 55px;
+}
 
+.content-body {
+    margin-top: 55px;
+}
+
+.content-body{
+    margin-top: 55px;
+}
+
+@media (min-width: 768px) {
+    .content-body {
+        margin-top: 52px;
+}
+}
+
+@media (min-width: 992px) {
+    .content-body {
+    margin-top: 80px;
+}
+}
+
+@media (min-width: 1200px) {
+    .content-body {
+    margin-top: 52px;
+}
+}
 /*.navigation-links {
     color: #FFF;
 }
