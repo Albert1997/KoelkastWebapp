@@ -18,6 +18,7 @@
 <body>
     @*@functions.IsEmail("j@j.com")*@
     <nav class="navbar navbar-inverse navbar-fixed-top navigation">
+        <div class="container-fluid"></div>
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -69,6 +70,10 @@
             </div><!--/.navbar-collapse -->
         </div>
     </nav>
+    <div class="container-fluid">
+        @RenderSection("backgroundimage", required: false)
+    </div>
+
     <div class="container content-body">
         @RenderSection("featured", required: false)
         @RenderBody()

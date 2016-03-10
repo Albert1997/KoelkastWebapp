@@ -8,7 +8,7 @@
     Page.Title = "Koelkast";
     
     var db = Database.Open("StarterSite");
-    var selectedData=db.Query("SELECT Product, Aantal FROM Product");
+    var selectedData=db.Query("SELECT * FROM Product");
     var grid = new WebGrid(source: selectedData, rowsPerPage: 20);
 }
 
@@ -31,6 +31,7 @@
     headerStyle: "head",
     alternatingRowStyle: "alt",
     columns: grid.Columns(
+    grid.Column("Afbeelding"),
     grid.Column("Product"),
     grid.Column("Aantal")
     )
