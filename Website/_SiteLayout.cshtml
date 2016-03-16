@@ -38,17 +38,17 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navigation-links">
                     <li><a href="~/">Home</a></li>                    
-                    
+                     @if (WebSecurity.IsAuthenticated)
+                        {<li><a href="~/Koelkast">Koelkast</a></li>}
                     @if (!WebSecurity.IsAuthenticated)
                     {
-                    <li><a href="~/Account/Register">Registreer</a></li>
+                        <li><a href="~/Account/Register">Registreer</a></li>
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         @if (WebSecurity.IsAuthenticated)
                         {
-                            <li><a href="~/Koelkast">Koelkast</a></li>
                             <form id="logoutForm" action="~/Account/Logout" method="post" class="form-horizontal">
                                 <a class="email" href="~/Account/Manage" title="Manage">@WebSecurity.CurrentUserName</a> |
                                 @AntiForgery.GetHtml()
