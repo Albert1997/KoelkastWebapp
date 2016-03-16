@@ -118,21 +118,7 @@
                 @* Write any password validation errors to the page *@
                 @Html.ValidationMessage("confirmPassword")
             </div>
-            <div class="form-group">
-                <div class="message-info">
-                    <p>
-                        To enable CAPTCHA verification, <a href="http://go.microsoft.com/fwlink/?LinkId=204140">install the
-                        ASP.NET Web Helpers Library</a> and uncomment ReCaptcha.GetHtml and replace 'PUBLIC_KEY'
-                        with your public key. At the top of this page, uncomment ReCaptcha. Validate and
-                        replace 'PRIVATE_KEY' with your private key.
-                        Register for reCAPTCHA keys at <a href="http://recaptcha.net">reCAPTCHA.net</a>.
-                    </p>
-                </div>
-                @*
-                @ReCaptcha.GetHtml("PUBLIC_KEY", theme: "white")
-                @Html.ValidationMessage("recaptcha")
-                *@
-            </div>
+            
 
             <button type="submit" class="btn btn-default">Register</button>
         </fieldset>
