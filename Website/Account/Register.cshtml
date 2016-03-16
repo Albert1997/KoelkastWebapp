@@ -95,7 +95,6 @@ Validation.RequireField("email", "Voer een emailadres in");
         @Html.ValidationSummary("Account creation was unsuccessful. Please correct the errors and try again.", excludeFieldErrors: true, htmlAttributes: null)
 
         <fieldset>
-            <legend>Registratie formulier</legend>
 
             <div class="form-group">
                 <label for="email" @if(!ModelState.IsValidField("email")){<text> class="error-label" </text>  }>Email</label>

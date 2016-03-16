@@ -62,14 +62,12 @@ Validation.RequireField("email", "Voer een emailadres in.");
 </hgroup>
 
 <section id="loginForm">
-    <h2>Use a local account to log in.</h2>
     <form method="post">
         @AntiForgery.GetHtml()
         @* If one or more validation errors exist, show an error *@
         @Html.ValidationSummary("Log in was unsuccessful. Please correct the errors and try again.", excludeFieldErrors: true, htmlAttributes: null)
 
         <fieldset>
-            <legend>Log in</legend>
             <ol>
                 <li class="email">
                     <label for="email" @if (!ModelState.IsValidField("email"))
