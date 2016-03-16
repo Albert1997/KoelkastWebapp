@@ -1,0 +1,87 @@
+﻿@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Pas een product aan";
+    
+    var Product = "";
+    var Aantal = "";
+    var Afbeelding = "";
+    var Hoeveelheid = "";
+    var ProductID = "";
+
+    
+
+    if(!IsPost){
+        if(!Request.QueryString["id"].IsEmpty() && Request.QueryString["id"].IsInt()) {
+            ProductID = Request.QueryString["id"];
+            var db = Database.Open("StarterSite");
+            var dbCommand = "SELECT * FROM Product WHERE ProductID = @0";
+            var row = db.QuerySingle(dbCommand, ProductID);
+
+            if(row != null) {
+                Product = row.Product;
+                Aantal = Convert.ToString(row.Aantal);
+                Afbeelding = row.Afbeelding;
+                Hoeveelheid = row.Hoeveelheid;
+            }
+            else{
+                Validation.AddFormError("Geen product geselecteerd.");
+            }
+        }
+        else{
+            Validation.AddFormError("Geen Product geselecteerd.");
+        }
+    }
+
+    if(IsPost){
+        Validation.RequireField("Product", "Je moet een product naam kiezen");
+        Validation.RequireField("Aantal", "Kies een Aantal");
+        Validation.RequireField("Hoeveelheid", "Kies een Hoeveelheid");
+        Validation.RequireField("ProductID", "Geen product gevonden!");
+
+
+            
+
+        Product = Request.Form["Product"];
+        Aantal = Request.Form["Aantal"];
+        Afbeelding = Request.Form["Afbeelding"];
+        Hoeveelheid = Request.Form["Hoeveelheid"];
+        ProductID = Request.Form["ProductID"];
+
+        if(Validation.IsValid()){
+            var db = Database.Open("StarterSite");
+            var updateCommand = "UPDATE Product SET Product=@0, Aantal=@1, Afbeelding=@2, Hoeveelheid=@3 WHERE ProductID=@4";
+            db.Execute(updateCommand, Product, Aantal, Afbeelding, Hoeveelheid, ProductID);
+            Response.Redirect("~/Koelkast");
+        }
+    }
+}
+  <h1>Pas een product aan.</h1>
+    @Html.ValidationSummary()
+  <form method="post">
+    <fieldset>
+      <legend>Product</legend>
+
+      <p><label for="Product">Product:</label>
+         <input type="text" name="Product" value="@Product" /></p>
+        
+      <p><label for="Aantal">Aantal:</label>
+         <input type="text" name="Aantal" value="@Aantal" /></p>
+        
+      <p><label for="Afbeelding">Afbeelding:</label>
+         <input type="text" name="Afbeelding" value="@Afbeelding" /></p>
+
+        <p><label for="Hoeveelheid">Hoeveelheid:</label>
+         <input type="text" name="Hoeveelheid" value="@Hoeveelheid" /></p>
+        <select name="Hoeveelheid">
+            <option value="@Hoeveelheid" name ="Hoeveelheid">Per stuk</option>
+            <option value="@Hoeveelheid" name ="Hoeveelheid">Per verpakking</option>
+            <option value="@Hoeveelheid" name ="Hoeveelheid">Per 100 gr</option>
+            <option value="@Hoeveelheid" name ="Hoeveelheid">per 1000 gr</option>
+        </select>
+</form>
+      <input type="hidden" name="ProductID" value="@ProductID" />
+
+      <p><input type="submit" name="buttonSubmit" value="Aanpassen" /></p>
+    </fieldset>
+  </form>
+  <p><a href="~/Koelkast">Terug naar de koelkast</a></p>

@@ -1,0 +1,58 @@
+﻿@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Verwijder een product";
+    
+    var ProductID = "";
+    var Product = "";
+    var Aantal = 0;
+
+    if(!IsPost){
+        if(!Request.QueryString["id"].IsEmpty() && Request.QueryString["id"].IsInt()){
+            ProductID = Request.QueryString["id"];
+            var db = Database.Open("StarterSite");
+            var dbCommand = "SELECT * FROM Product WHERE ProductID = @0";
+            var row = db.QuerySingle(dbCommand, ProductID);
+            if(row != null) {
+                 Product = row.Product;
+                 Aantal = row.Aantal;
+}
+        else{
+        Validation.AddFormError("Geen Product gevonden met het meegegeven ID");
+        }
+        }
+else{
+     Validation.AddFormError("Geen Product geselecteerd");
+        }
+    }
+
+        if(IsPost && !Request["buttonDelete"].IsEmpty()){
+        ProductID = Request.QueryString["id"];
+        var db = Database.Open("StarterSite");
+        var deleteCommand = "DELETE FROM Product WHERE ProductID = @0";
+        db.Execute(deleteCommand, ProductID);
+        Response.Redirect("~/Koelkast");
+    }
+}
+
+
+
+      <h1>Verwijder een Product</h1>
+        @Html.ValidationSummary()
+      
+
+      <form method="post">
+        <fieldset>
+       <!-- <legend>Informatie Product</legend> -->
+
+        <p><span>Product: </span>
+         <span>@Product</span></p>
+
+        <p><span>Aantal: </span>
+         <span>@Aantal</span></p>
+
+
+        <input type="hidden" name="movieid" value="@ProductID" />
+        <p><input type="submit" name="buttonDelete" value="Verwijder Product" /></p>
+        </fieldset>
+      </form>
+<p><a href="~/Koelkast">Terug</a></p>
