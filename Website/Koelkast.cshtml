@@ -11,7 +11,6 @@
     var selectedData=db.Query("SELECT * FROM Product");
     var grid = new WebGrid(source: selectedData, rowsPerPage: 20);
     var Kaas = db.QueryValue("SELECT Afbeelding FROM Product");
-    string Kaasimg = "<img src= "~/Images/Productafbeeldingen/@Kaas" alt ="Kaas"></img>";
 }
 
 
