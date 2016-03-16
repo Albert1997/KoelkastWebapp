@@ -38,7 +38,7 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navigation-links">
                     <li><a href="~/">Home</a></li>                    
-                    <li><a href="~/Koelkast">Koelkast</a></li>
+                    
                     @if (!WebSecurity.IsAuthenticated)
                     {
                     <li><a href="~/Account/Register">Registreer</a></li>
@@ -48,6 +48,7 @@
                     <li>
                         @if (WebSecurity.IsAuthenticated)
                         {
+                            <li><a href="~/Koelkast">Koelkast</a></li>
                             <form id="logoutForm" action="~/Account/Logout" method="post" class="form-horizontal">
                                 <a class="email" href="~/Account/Manage" title="Manage">@WebSecurity.CurrentUserName</a> |
                                 @AntiForgery.GetHtml()
@@ -84,7 +85,7 @@
     @* footer *@
     <div class="navbar navbar-default navbar-fixed-bottom">
         <div class="container">
-           @if (koelkast == "/Koelkast"){
+           @if (koelkast == "/Koelkast" || koelkast == "/Koelkast.cshtml"){
             <div class="toevoegen">
                 <div class="handmatig">HANDMATIG<br> TOEVOEGEN</div>
                 <div class="scannen">PRODUCT SCANNEN</div>
