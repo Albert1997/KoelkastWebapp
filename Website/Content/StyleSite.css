@@ -193,9 +193,39 @@ body{
     width: 100%;
 }
 
+
+
+.toevoegen{
+    font-size: 15px;
+    text-align: center;
+    color: #fff;
+    width: 680px;
+    margin: 0 auto;
+    height: 48px;
+}
+.handmatig{
+    padding: 5px;
+    height: 100%;
+    width: 24%;
+    float: left;
+    background-color: #1B9C9B;
+}
+.scannen{
+    padding: 13px;
+    height: 100%;
+    width: 74%;
+    float: right;
+    background-color: #1A8281;
+}
+
+
+
+
 /* Koelkast  */
 @media (max-width: 768px) {
-    
+    .toevoegen{
+    width: 100%;
+}
     
     .productachtergrond{
   left: 0;
