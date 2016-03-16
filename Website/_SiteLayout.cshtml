@@ -37,12 +37,12 @@
 
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navigation-links">
-                    <li><a href="~/">Home</a></li>                    
-                     @if (WebSecurity.IsAuthenticated)
-                        {<li><a href="~/Koelkast">Koelkast</a></li>}
+                    <li><a href="~/">Home</a></li>   
+                    @if(WebSecurity.IsAuthenticated){                 
+                    <li><a href="~/Koelkast">Koelkast</a></li>}
                     @if (!WebSecurity.IsAuthenticated)
                     {
-                        <li><a href="~/Account/Register">Registreer</a></li>
+                    <li><a href="~/Account/Register">Registreer</a></li>
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

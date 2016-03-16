@@ -4,10 +4,9 @@
     
     var Product = "";
     var Aantal = "";
-    var Afbeelding = "default.png";
+    var Afbeelding = "";
     var Hoeveelheid = "";
     var ProductID = "";
-    var Productafbeelding = "";
 
     
 
@@ -53,7 +52,6 @@
             var updateCommand = "UPDATE Product SET Product=@0, Aantal=@1, Afbeelding=@2, Hoeveelheid=@3 WHERE ProductID=@4";
             db.Execute(updateCommand, Product, Aantal, Afbeelding, Hoeveelheid, ProductID);
             Response.Redirect("~/Koelkast");
-            Productafbeelding = Product+".jpg";
         }
     }
 }
@@ -70,16 +68,14 @@
          <input type="text" name="Aantal" value="@Aantal" /></p>
         
       <p><label for="Afbeelding">Afbeelding:</label>
-         <input type="text" name="Afbeelding" value="@Productafbeelding"/></p>
-        
-        <!--<p><label for="Hoeveelheid">Hoeveelheid:</label>
-         <input type="text" name="Hoeveelheid" value="@Hoeveelheid" /></p>-->
+         <input type="text" name="Afbeelding" value="@Afbeelding" /></p>
 
+        <p><label for="Hoeveelheid">Hoeveelheid:</label>
         <select name="Hoeveelheid">
-            <option value="@Hoeveelheid" name ="Hoeveelheid">Per stuk</option>
-            <option value="@Hoeveelheid" name ="Hoeveelheid">Per verpakking</option>
-            <option value="@Hoeveelheid" name ="Hoeveelheid">Per 100 gr</option>
-            <option value="@Hoeveelheid" name ="Hoeveelheid">per 1000 gr</option>
+            <option selected="selected" value="Per stuk">Per stuk</option>
+            <option value="Per verpakking">Per verpakking</option>
+            <option value="Per 100 gr">Per 100 gr</option>
+            <option value="per 1000 gr">per 1000 gr</option>
         </select>
 
       <input type="hidden" name="ProductID" value="@ProductID" />
