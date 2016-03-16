@@ -6,7 +6,7 @@
 
 @{
     Layout = "~/_SiteLayout.cshtml";
-    Page.Title = "Register";
+    Page.Title = "Registreer";
 
     int Koelkastnr = 0;
     Random random = new Random ();
@@ -19,15 +19,15 @@
     var confirmPassword = "";
 
     // Setup validation
-    Validation.RequireField("email", "You must specify an email address.");
-    Validation.RequireField("password", "Password cannot be blank.");
+Validation.RequireField("email", "Voer een emailadres in");
+    Validation.RequireField("password", "Voer een wachtwoord in");
     Validation.Add("confirmPassword",
-        Validator.EqualsTo("password", "Password and confirmation password do not match."));
+        Validator.EqualsTo("password", "Wachtwoorden komen niet overeen"));
     Validation.Add("password",
         Validator.StringLength(
             maxLength: Int32.MaxValue,
             minLength: 6,
-            errorMessage: "Password must be at least 6 characters"));
+            errorMessage: "Wachtwoord moet tenminste 6 karakters lang zijn"));
 
     // If this is a POST request, validate and process data
     if (IsPost) {
@@ -36,10 +36,7 @@
         password = Request.Form["password"];
         confirmPassword = Request.Form["confirmPassword"];
 
-        // Validate the user's captcha answer
-        // if (!ReCaptcha.Validate("PRIVATE_KEY")) {
-        //     ModelState.AddError("recaptcha", "Captcha response was not correct");
-        // }
+
 
         // If all information is valid, create a new account
         if (Validation.IsValid()) {
@@ -83,13 +80,13 @@
                 }
             } else {
                 // User already exists
-                ModelState.AddFormError("Email address is already in use.");
+                ModelState.AddFormError("Email is al in gebruik.");
             }
         }
     }
 }
 <div class="container">
-    <h1>@Page.Title. <small>Create a new account.</small></h1>
+    <h1>@Page.Title. <small>Maak een nieuw account aan.</small></h1>
     
 
     <form method="post">
@@ -98,43 +95,28 @@
         @Html.ValidationSummary("Account creation was unsuccessful. Please correct the errors and try again.", excludeFieldErrors: true, htmlAttributes: null)
 
         <fieldset>
-            <legend>Registration Form</legend>
+            <legend>Registratie formulier</legend>
 
             <div class="form-group">
-                <label for="email" @if(!ModelState.IsValidField("email")){<text> class="error-label" </text>  }>Email address</label>
+                <label for="email" @if(!ModelState.IsValidField("email")){<text> class="error-label" </text>  }>Email</label>
                 <input type="text" id="email" name="email" value="@email" @Validation.For("email") class="form-control" />
                 @* Write any email validation errors to the page *@
                 @Html.ValidationMessage("email")
             </div>
             <div class="form-group">
-                <label for="password" @if(!ModelState.IsValidField("password")) {<text> class="error-label" </text>  }>Password</label>
+                <label for="password" @if(!ModelState.IsValidField("password")) {<text> class="error-label" </text>  }>Wachtwoord</label>
                 <input type="password" id="password" name="password" @Validation.For("password") class="form-control" />
                 @* Write any password validation errors to the page *@
                 @Html.ValidationMessage("password")
             </div>
             <div class="form-group">
-                <label for="confirmPassword" @if(!ModelState.IsValidField("confirmPassword")) {<text> class="error-label" </text>  }>Confirm password</label>
+                <label for="confirmPassword" @if(!ModelState.IsValidField("confirmPassword")) {<text> class="error-label" </text>  }>Bevestig wachtwoord</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" @Validation.For("confirmPassword") class="form-control" />
                 @* Write any password validation errors to the page *@
                 @Html.ValidationMessage("confirmPassword")
             </div>
-            <div class="form-group">
-                <div class="message-info">
-                    <p>
-                        To enable CAPTCHA verification, <a href="http://go.microsoft.com/fwlink/?LinkId=204140">install the
-                        ASP.NET Web Helpers Library</a> and uncomment ReCaptcha.GetHtml and replace 'PUBLIC_KEY'
-                        with your public key. At the top of this page, uncomment ReCaptcha. Validate and
-                        replace 'PRIVATE_KEY' with your private key.
-                        Register for reCAPTCHA keys at <a href="http://recaptcha.net">reCAPTCHA.net</a>.
-                    </p>
-                </div>
-                @*
-                @ReCaptcha.GetHtml("PUBLIC_KEY", theme: "white")
-                @Html.ValidationMessage("recaptcha")
-                *@
-            </div>
 
-            <button type="submit" class="btn btn-default">Register</button>
+            <button type="submit" class="btn btn-default">Registreer</button>
         </fieldset>
     </form>
 </div>
