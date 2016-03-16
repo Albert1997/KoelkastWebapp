@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string koelkast = Request.RawUrl.ToString();
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -82,7 +85,14 @@
     @* footer *@
     <div class="navbar navbar-default navbar-fixed-bottom">
         <div class="container">
-            <p class="navbar-text text-muted">&copy; @DateTime.Now.Year - @App.Name</p>
+           @if (koelkast == "/Koelkast"){
+            <div class="toevoegen">
+                <div class="handmatig">HANDMATIG<br> TOEVOEGEN</div>
+                <div class="scannen">PRODUCT SCANNEN</div>
+            </div>
+                  }
+            else{
+           <p style="margin: 0 auto;" class="navbar-text text-muted">&copy; @DateTime.Now.Year - @App.Name</p>}
         </div>
     </div>
 
