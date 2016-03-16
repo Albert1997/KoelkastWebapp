@@ -38,15 +38,167 @@
 
 @media (min-width: 1200px) {
     .content-body {
-    margin-top: 52px;
-}
+        margin-top: 52px;
+    }
 
 
-}
-/*.navigation-links {
+
+    /*.navigation-links {
     color: #FFF;
 }
 
 .navigation-links:focus {
     color: #D8FFE8;
 }*/
+
+}
+
+body{
+    background-color: #E9F7E8;
+    color: #777777;
+}
+.navbar-inverse {
+    background-image: none;
+    background-color: #28B3B2;
+    border-color:#fff;
+    }
+
+.navbar-default{
+    background-image: none;
+    background-color: #28B3B2;
+    border-color:#fff;
+}
+
+.navbar-default .navbar-text{
+    color: #fff;
+    
+}
+
+.form-control{
+    background-color: #7ABFBF;
+    border: none;
+    border-radius: 0px;
+    color: #fff;
+}
+.btn-success{
+    background-color: #219E9D;
+    border: none;
+}
+
+.btn{
+    border-radius: 0px;
+    padding: 7px 20px;
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav > li > a{
+    text-shadow: 0 0px 0 rgba(0, 0, 0, .25);
+}
+
+.navbar-inverse .navbar-brand{
+    color: #fff;
+}
+
+
+
+/* Voor de koelkastpagina */
+.achtergrond{
+    color: #fff;
+    margin: 0 auto;
+    background-color: #BFFFFF ;
+    width: 681px;
+    height: 192px;
+    margin-top: 25px;
+}
+
+.afbeelding{
+    width: 192px;
+    height: 192px;
+    background-color: #fff;
+    float: left;
+    margin-left: 16px;
+}
+
+.product{
+    width: 100%;
+    height: 100%;
+}
+
+.productachtergrond{
+    width: 453px;
+    height: 93px;
+    float: right;
+    margin-right:20px;
+    margin-top:16px; 
+    background-color: #28B3B2;
+}
+
+.knoppen{
+    width: 407px;
+    height: 48px;
+    float: right;
+    margin-right: 20px;
+    margin-top: 11px;
+}
+
+.aanpassen{
+    font-size: 18px;
+    width: 194px;
+    height:48px;
+    float: right;
+    background-color: #7ABFBF;
+    text-align: center;
+    padding: 12px;
+}
+
+.verwijderen{
+    font-size: 18px;
+    width: 194px;
+    height:48px;
+    float: left;
+    background-color: #7ABFBF;
+    text-align: center;
+    padding: 12px;
+}
+
+.naam{
+    font-size: 25px;;
+    height: 30px;
+    width: 270px;
+    float: left;
+    margin-left: 45px;
+    margin-top: 26px;
+}
+
+.aantal{
+    font-size: 30px;
+    height:35px;
+    width: 125px;
+    text-align: right;
+    float: right;
+    margin-right:7px;
+    margin-top: 25px;
+}
+
+.hoeveelheid{
+    font-size: 15px;
+    width: 200px;
+    height: 25px;
+    float: left;
+    margin-left: 45px;
+}
+
+.titel{
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+
+/* Koelkast  */
+@media (max-width: 768px) {
+    
+    
+    .productachtergrond{
+  left: 0;
+} 
+   
+}

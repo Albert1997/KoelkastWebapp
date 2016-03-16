@@ -1,23 +1,25 @@
-﻿@{
-     if (!WebSecurity.IsAuthenticated)
-     {
-       Response.Redirect("~/Account/Login");
-     }   
-
+﻿@{ 
     Layout = "~/_SiteLayout.cshtml";
     Page.Title = "Koelkast";
     
+    if (!WebSecurity.IsAuthenticated)
+    {
+      Response.Redirect("~/Account/Login");
+    }   
+
+    var Email = WebSecurity.CurrentUserName;
     var db = Database.Open("StarterSite");
-    var selectedData=db.Query("SELECT * FROM Product");
-    var grid = new WebGrid(source: selectedData, rowsPerPage: 20);
-    var Kaas = db.QueryValue("SELECT Afbeelding FROM Product");
-    string Kaasimg = "<img src= "~/Images/Productafbeeldingen/@Kaas" alt ="Kaas"></img>";
+    var codevanuser = "SELECT Koelkastnr FROM Userprofile WHERE LOWER(Email) = LOWER(@0)";
+    if(Email == ""){Response.Redirect("~/Account/Login");};
+    var decodevanbelang = db.QueryValue(codevanuser, Email);
+    var selectCommand = "SELECT * FROM Product WHERE Koelkastnr = @0";
+    var selectedData = db.Query(selectCommand, decodevanbelang);
+    var grid = new WebGrid(source: selectedData, rowsPerPage:20);
+    string map = "/Images/Productafbeeldingen/";
 }
 
-
-<hgroup class="title">
+<div class="titel">
     <h1>@Page.Title</h1>
-</hgroup>
 
 <form method="get">
   <div>
@@ -26,25 +28,23 @@
     <input type="Submit" value="Search Product" /><br/>
     </div>
 </form>
-<div>
- <img src="~/Images/Productafbeeldingen/@Kaas"alt ="Kaas"></img>
-</div>
-<div> 
-@grid.GetHtml(
-    tableStyle: "grid",
-    headerStyle: "head",
-    alternatingRowStyle: "alt",
-    columns: grid.Columns(
-    grid.Column("Afbeelding"),
-    grid.Column("Product"),
-    grid.Column("Aantal")
-    )
-  )
 </div>
 
-<style type="text/css">
-  .grid { margin: 4px; border-collapse: collapse; width: 600px; }
-  .grid th, .grid td { border: 1px solid #C0C0C0; padding: 5px; }
-  .head { background-color: #E8E8E8; font-weight: bold; color: #FFF; }
-  .alt { background-color: #E8E8E8; color: #000; }
-</style> 
+@foreach(var row in db.Query(selectCommand, decodevanbelang))
+{
+<div class="achtergrond">
+    <div class="afbeelding"><img alt="@row.Product" style="width: 100%; height: 100%;" src="@map@row.Afbeelding"></div>
+    <div class="product">
+        <div class="productachtergrond">
+            <div class="naam">@row.Product</div>
+            <div class="aantal">@row.Aantal</div>
+            <div class="hoeveelheid">@row.Hoeveelheid</div>
+        </div>
+        <div class="knoppen">
+            <div class="verwijderen">Verwijderen</div>
+            <div class="aanpassen">Aanpassen</div>
+        </div>
+    </div> 
+   
+</div>
+}
