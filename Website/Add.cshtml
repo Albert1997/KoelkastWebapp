@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Voeg een product toe";
+    
+    var Product = "";
+    var Aantal = "";
+    var Afbeelding = "";
+    var Hoeveelheid = "";
+
+    var Email = WebSecurity.CurrentUserName;
+    var db = Database.Open("StarterSite");
+    var codevanuser = "SELECT Koelkastnr FROM Userprofile WHERE LOWER(Email) = LOWER(@0)";
+    if(Email == ""){Response.Redirect("~/Account/Login");};
+    var decodevanbelang = db.QueryValue(codevanuser, Email);
+
+    if(IsPost){
+        Validation.RequireField("Product", "Je moet een product naam kiezen");
+        Validation.RequireField("Aantal", "Kies een Aantal");
+        Validation.RequireField("Hoeveelheid", "Kies een Hoeveelheid");
+
+            Product = Request.Form["Product"];
+            Aantal = Request.Form["Aantal"];
+            Afbeelding = Request.Form["Afbeelding"];
+            Hoeveelheid = Request.Form["Hoeveelheid"];
+
+        if(Validation.IsValid()){
+            
+
+            
+            var insertCommand = "INSERT INTO Product (Product, Koelkastnr, Aantal, Afbeelding, Hoeveelheid) VALUES(@0, @1, @2, @3, @4)";
+            
+
+            db.Execute(insertCommand, Product, decodevanbelang, Aantal, Afbeelding, Hoeveelheid);
+            Response.Redirect("~/Koelkast");
+        }
+    }
+}
+<h1>Voeg een product toe</h1>
+    @Html.ValidationSummary()
+  <form method="post">
+    <fieldset>
+      <legend>Product</legend>
+
+      <p><label for="Product">Product:</label>
+         <input type="text" name="Product" value="@Product" /></p>
+        
+      <p><label for="Aantal">Aantal:</label>
+         <input type="text" name="Aantal" value="@Aantal" /></p>
+        
+      <p><label for="Afbeelding">Afbeelding:</label>
+         <input type="text" name="Afbeelding" value="@Afbeelding" /></p>
+
+        <p><label for="Hoeveelheid">Hoeveelheid:</label>
+        <select name="Hoeveelheid">
+            <option selected="selected" value="Per stuk">Per stuk</option>
+            <option value="Per verpakking">Per verpakking</option>
+            <option value="Per 100 gr">Per 100 gr</option>
+            <option value="per 1000 gr">per 1000 gr</option>
+        </select>
+
+      <p><input type="submit" name="buttonSubmit" value="Toevoegen" /></p>
+    </fieldset>
+  </form>
+  <p><a href="~/Koelkast">Terug naar de koelkast</a></p>
