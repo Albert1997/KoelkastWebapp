@@ -211,3 +211,94 @@ body{
 } 
    
 }
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .achtergrond {
+      width: 40%;
+    }
+    .afbeelding {
+      width: 30%;
+    }
+    .productachtergrond {
+        width:  60%;
+    }
+    .naam {
+        width:  30%;
+    }
+    .aantal {
+        width:  30%;
+    }
+    .hoeveelheid {
+        width:  30%;
+    }
+    .knoppen {
+        width: 60%;
+    }
+    .verwijderen {
+        width:  45%;
+    }
+    .aanpassen {
+        width:  45%;
+    }    
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .achtergrond {
+      width: 70%;
+    }
+    .afbeelding {
+      width: 30%;
+    }
+    .productachtergrond {
+        width:  60%;
+    }
+    .naam {
+        width:  30%;
+    }
+    .aantal {
+        width:  30%;
+    }
+    .hoeveelheid {
+        width:  30%;
+    }
+    .knoppen {
+        width: 60%;
+    }
+    .verwijderen {
+        width:  45%;
+    }
+    .aanpassen {
+        width:  45%;
+    }    
+}
+
+
+@media (min-width: 500px) and (max-width: 767px) {
+    .achtergrond {
+      width: 100%;
+    }
+    .afbeelding {
+      width: 30%;
+    }
+    .productachtergrond {
+        width:  60%;
+    }
+    .naam {
+        width:  30%;
+    }
+    .aantal {
+        width:  30%;
+    }
+    .hoeveelheid {
+        width:  30%;
+    }
+    .knoppen {
+        width: 60%;
+    }
+    .verwijderen {
+        width:  45%;
+    }
+    .aanpassen {
+        width:  45%;
+    }    
+}
