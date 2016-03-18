@@ -1,7 +1,7 @@
 ﻿@{ 
     Layout = "~/_SiteLayout.cshtml";
     Page.Title = "Koelkast";
-    
+    string search = Request.RawUrl.ToString();
 
     if (!WebSecurity.IsAuthenticated)
     {
@@ -44,11 +44,19 @@ var searchTerm = "";
     <label for="searchProduct"></label>
     <input type="text" name="searchProduct" value="@Request.QueryString["searchProduct"]" />
     <input type="Submit" value="Zoek product" /><br/>
+<<<<<<< HEAD
 >>>>>>> origin/master
     </div>
 </form>
 </div>
+=======
+      @if (search.Contains("search")){<a href="~/Koelkast"> <div class="terug">Terug naar alle producten.</div> </a> }
+>>>>>>> origin/master
 
+          </div>
+</form>
+    </div>
+        </div>
 @foreach(var row in db.Query(selectCommands, searchTerm, decodevanbelang))
 {
 <div class="achtergrond">

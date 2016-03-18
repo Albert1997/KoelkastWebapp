@@ -1,5 +1,6 @@
 ﻿@{
     string koelkast = Request.RawUrl.ToString();
+    
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -85,7 +86,7 @@
     @* footer *@
     <div class="navbar navbar-default navbar-fixed-bottom">
         <div class="container">
-           @if (koelkast == "/Koelkast" || koelkast == "/Koelkast.cshtml"){
+           @if (koelkast == "/Koelkast%"){
             <div class="toevoegen">
                 <a href="~/Add"><div class="handmatig"><p>HANDMATIG<br> TOEVOEGEN</p></div></a>
                 <div class="scannen"><p>PRODUCT SCANNEN</p></div>

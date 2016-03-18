@@ -92,7 +92,7 @@ Validation.RequireField("email", "Voer een emailadres in");
     <form method="post">
         @AntiForgery.GetHtml()
         @* If at least one validation error exists, notify the user *@
-        @Html.ValidationSummary("Account creation was unsuccessful. Please correct the errors and try again.", excludeFieldErrors: true, htmlAttributes: null)
+        @Html.ValidationSummary("Het creëeren van een account is mislukt, corrigeer de errors en probeer opnieuw.", excludeFieldErrors: true, htmlAttributes: null)
 
         <fieldset>
 
