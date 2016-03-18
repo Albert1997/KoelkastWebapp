@@ -2,20 +2,31 @@
     Layout = "~/_SiteLayout.cshtml";
     Page.Title = "Koelkast";
     
+
     if (!WebSecurity.IsAuthenticated)
     {
       Response.Redirect("~/Account/Login");
-    }   
-
+    }  
+     
+var searchTerm = "";
     var Email = WebSecurity.CurrentUserName;
     var db = Database.Open("StarterSite");
     var codevanuser = "SELECT Koelkastnr FROM Userprofile WHERE LOWER(Email) = LOWER(@0)";
     if(Email == ""){Response.Redirect("~/Account/Login");};
     var decodevanbelang = db.QueryValue(codevanuser, Email);
-    var selectCommand = "SELECT * FROM Product WHERE Koelkastnr = @0";
-    var selectedData = db.Query(selectCommand, decodevanbelang);
-    var grid = new WebGrid(source: selectedData, rowsPerPage:20);
+    var selectCommand = "SELECT * FROM Product WHERE Koelkastnr = @1";
+    var selectedData = db.Query(selectCommand, searchTerm, decodevanbelang);
     string map = "/Images/Productafbeeldingen/";
+
+    var selectCommands = "SELECT * FROM Product WHERE Koelkastnr = @1";
+    
+
+            if(!Request.QueryString["searchProduct"].IsEmpty() ) {
+        selectCommands = "SELECT * FROM Product WHERE Product LIKE @0 AND Koelkastnr = @1";
+        searchTerm = "%" + Request.QueryString["searchProduct"] + "%";
+    }
+    string repeat ="";
+    //var dataSelected = db.Query(selectCommands, searchTerm);
 }
 
 <div class="titel">
@@ -23,16 +34,22 @@
 
 <form method="get">
   <div>
+<<<<<<< HEAD
     <label for="searchProduct">Zoek product:</label>
     <br>
     <input class="Search-Form" type="text" name="searchProduct" value="" />
       <br>  
     <input class="Submit-Btns" type="Submit" value="Search Product" /><br/>
+=======
+    <label for="searchProduct"></label>
+    <input type="text" name="searchProduct" value="@Request.QueryString["searchProduct"]" />
+    <input type="Submit" value="Zoek product" /><br/>
+>>>>>>> origin/master
     </div>
 </form>
 </div>
 
-@foreach(var row in db.Query(selectCommand, decodevanbelang))
+@foreach(var row in db.Query(selectCommands, searchTerm, decodevanbelang))
 {
 <div class="achtergrond">
     <div class="afbeelding"><img alt="@row.Product" style="width: 100%; height: 100%;" src="@map@row.Afbeelding"></div>
