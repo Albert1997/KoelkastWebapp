@@ -99,6 +99,13 @@ body{
     height: 100%;
 }
 
+.terug{
+    width: 20%;
+    height: auto;
+    background-color: white;
+    position: absolute;
+}
+
 .productachtergrond{
     width: 453px;
     height: 93px;
