@@ -25,7 +25,6 @@ var searchTerm = "";
         selectCommands = "SELECT * FROM Product WHERE Product LIKE @0 AND Koelkastnr = @1";
         searchTerm = "%" + Request.QueryString["searchProduct"] + "%";
     }
-    string repeat ="";
     //var dataSelected = db.Query(selectCommands, searchTerm);
 }
 
@@ -34,24 +33,14 @@ var searchTerm = "";
 
 <form method="get">
   <div>
-<<<<<<< HEAD
-    <label for="searchProduct">Zoek product:</label>
-    <br>
-    <input class="Search-Form" type="text" name="searchProduct" value="" />
-      <br>  
-    <input class="Submit-Btns" type="Submit" value="Search Product" /><br/>
-=======
     <label for="searchProduct"></label>
     <input type="text" name="searchProduct" value="@Request.QueryString["searchProduct"]" />
     <input type="Submit" value="Zoek product" /><br/>
-<<<<<<< HEAD
->>>>>>> origin/master
     </div>
 </form>
 </div>
-=======
+
       @if (search.Contains("search")){<a href="~/Koelkast"> <div class="terug">Terug naar alle producten.</div> </a> }
->>>>>>> origin/master
 
           </div>
 </form>

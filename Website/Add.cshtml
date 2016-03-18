@@ -1,4 +1,5 @@
 ﻿@{
+    if (!WebSecurity.IsAuthenticated){Response.Redirect("~/Account/login");}
     Layout = "~/_SiteLayout.cshtml";
     Page.Title = "Voeg een product toe";
     
