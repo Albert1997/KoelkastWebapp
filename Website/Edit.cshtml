@@ -62,16 +62,16 @@
     @Html.ValidationSummary()
   <form method="post">
     <fieldset>
-      <legend>Product</legend>
-
+      <legend></legend>
+        <div>
       <p><label for="Product">Product:</label>
-         <input type="text" name="Product" value="@Product" /></p>
+         <input class="Forms" type="text" name="Product" value="@Product" /></p>
         
       <p><label for="Aantal">Aantal:</label>
-         <input type="text" name="Aantal" value="@Aantal" /></p>
+         <input class="Forms" type="text" name="Aantal" value="@Aantal" /></p>
         
       <p><label for="Afbeelding">Afbeelding:</label>
-         <input type="text" name="Afbeelding" value="@Afbeelding" /></p>
+         <input class="Forms" type="text" name="Afbeelding" value="@Afbeelding" /></p>
 
         <p><label for="Hoeveelheid">Hoeveelheid:</label>
         <select name="Hoeveelheid">
@@ -80,10 +80,10 @@
             <option value="Per 100 gr">Per 100 gr</option>
             <option value="per 1000 gr">per 1000 gr</option>
         </select>
-
+        
       <input type="hidden" name="ProductID" value="@ProductID" />
-
-      <p><input type="submit" name="buttonSubmit" value="Aanpassen" /></p>
+        </div>
+      <p><input class="Submit-Btns" type="submit" name="buttonSubmit" value="Aanpassen" /></p>
     </fieldset>
   </form>
   <p><a href="~/Koelkast">Terug naar de koelkast</a></p>
