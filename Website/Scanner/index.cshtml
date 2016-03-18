@@ -1,7 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="style.css" />
+﻿@{
+    Layout = "~/_SiteLayout.cshtml";
+}
+
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="barcode.js"></script>
 
@@ -29,8 +29,6 @@ $(document).ready(function() {
 
 </script>
 
-</head>
-<body>
 
 <div id="barcode">
 	<video id="barcodevideo" autoplay></video>
@@ -39,5 +37,4 @@ $(document).ready(function() {
 <canvas id="barcodecanvas" ></canvas>
 <div id="result"></div>
 
-</body>
-</html>
+

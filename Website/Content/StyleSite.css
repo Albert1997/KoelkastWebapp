@@ -325,6 +325,29 @@ body{
 .scannen:hover {
     background-color: RGBA(64, 62, 62, 0.81);
 }
+#barcodevideo, #barcodecanvas, #barcodecanvasg {
+	height: 400px;
+}	
+
+#barcodecanvasg {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+    float:  page;
+}
+
+#result {
+	font-family: verdana;
+	font-size: 1.5em;
+}
+
+#barcode {
+	position: relative;
+}	
+
+#barcodecanvas {
+	display: none;
+}
 
 
 /* Koelkast  */

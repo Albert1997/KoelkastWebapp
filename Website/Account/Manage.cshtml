@@ -19,7 +19,7 @@
     string successMessage = "";
     var message = Request.QueryString["message"];
     if (message == "ChangedPassword") {
-        successMessage = "Your password has been changed.";
+        successMessage = "Je wachtwoord is veranderd.";
     } else if (message == "SetPassword") {
         successMessage = "Your password has been set.";
     } else if (message == "RemovedLogin") {
@@ -35,22 +35,22 @@
 
     // Setup validation
     if (hasLocalAccount) {
-        Validation.RequireField("currentPassword", "The current password field is required.");
+        Validation.RequireField("currentPassword", "Huidige wachtwoord is benodigd.");
         Validation.Add("currentPassword",
             Validator.StringLength(
                 maxLength: Int32.MaxValue,
                 minLength: 6,
-                errorMessage: "Current password must be at least 6 characters"));
+                errorMessage: "Huidig wachtwoord moet tenminste 6 karakters lang zijn."));
     }
-    Validation.RequireField("newPassword", "The new password field is required.");
+    Validation.RequireField("newPassword", "Nieuw wachtwoord moet worden ingevuld.");
     Validation.Add("confirmPassword",
         Validator.Required("The confirm new password field is required."),
-        Validator.EqualsTo("newPassword", "The new password and confirmation password do not match."));
+        Validator.EqualsTo("newPassword", "Nieuwe wachtwoorden komen niet overeen."));
     Validation.Add("newPassword",
         Validator.StringLength(
             maxLength: Int32.MaxValue,
             minLength: 6,
-            errorMessage: "New password must be at least 6 characters"));
+            errorMessage: "Nieuw wachtwoord moet tenminste 6 karakters lang zijn."));
 
     if (IsPost) {
         AntiForgery.Validate();
@@ -66,7 +66,7 @@
                         Response.Redirect("~/Account/Manage?message=ChangedPassword");
                         return;
                     } else {
-                        ModelState.AddFormError("An error occurred when attempting to change the password. Please contact the site owner.");
+                        ModelState.AddFormError("Het huidige en het nieuwe wachtwoord kunnen niet hetzelfde zijn.");
                     }
                 } else {
                     bool requireEmailConfirmation = !WebMail.SmtpServer.IsEmpty();
@@ -79,7 +79,7 @@
                     }
                 }
             } else {
-                ModelState.AddFormError("Password change was unsuccessful. Please correct the errors and try again.");
+                ModelState.AddFormError("Wachtwoord veranderen mislukt, corrigeer de errors en probeer opnieuw");
             }
         } else if (action == "removeLogin") {
             // Remove external login
