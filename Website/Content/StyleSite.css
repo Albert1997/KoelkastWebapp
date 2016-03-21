@@ -363,27 +363,15 @@ select {
 .scannen:hover {
     background-color: RGBA(64, 62, 62, 0.81);
 }
-#barcodevideo, #barcodecanvas, #barcodecanvasg {
-	height: 400px;
-}	
 
-#barcodecanvasg {
-	position: absolute;
-	top: 0px;
-	left: 0px;
+.beschrijving {
+    display:  none;
 }
-
-#result {
-	font-family: verdana;
-	font-size: 1.5em;
+.scanafbeelding {
+    display: none;
 }
-
-#barcode {
-	position: relative;
-}	
-
-#barcodecanvas {
-	display: none;
+.handmatigafbeelding {
+    display: none;
 }
 
 
@@ -544,16 +532,10 @@ select {
 
 /*footer*/
     .handmatig{
-        padding: 5px;
-        height: 100%;
-        width: 24%;
-        float: left;
+        display: none;
     }
     .scannen{
-        padding: 13px;
-        height: 100%;
-        width: 74%;
-        float: right;
+        display: none;
     }
     .toevoegen{
         font-size: 15px;
@@ -561,10 +543,25 @@ select {
         color: #fff;
         width: 100%;
         margin: 0 auto;
-        height: 48px;
+        height: auto;
     }
-    
+    .handmatigafbeelding {
+        display: inline-block;
+        margin: 5px;
+        float: left;
+    }
+    .scanafbeelding {
+        display: inline-block;
+        margin: 5px;
+        float: right;
+    }
+    .beschrijving {
+        display: inline-block;
+        padding-top: 15px;
+        height: 100%;
+    }
 }
+
 
 /* iPhone 5 */
 @media (max-width: 374px) {
@@ -625,23 +622,32 @@ select {
 
 /*footer*/
     .handmatig{
-        padding: 5px;
-        height: 100%;
-        width: 24%;
-        float: left;
+        display: none;
     }
     .scannen{
-        padding: 13px;
-        height: 100%;
-        width: 74%;
-        float: right;
+        display: none;
     }
     .toevoegen{
         font-size: 15px;
         text-align: center;
+        color: #fff;
         width: 100%;
         margin: 0 auto;
-        height: 48px;
+        height: auto;
     }
-    
+    .handmatigafbeelding {
+        display: inline-block;
+        margin: 5px;
+        float: left;
+    }
+    .scanafbeelding {
+        display: inline-block;
+        margin: 5px;
+        float: right;
+    }
+    .beschrijving {
+        display: inline-block;
+        padding-top: 15px;
+        height: 100%;
+    }
 }
