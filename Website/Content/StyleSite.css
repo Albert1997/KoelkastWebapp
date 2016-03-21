@@ -38,6 +38,30 @@ select {
 } 
 
 
+/*Barcode Scanner*/
+#barcodevideo, #barcodecanvas, #barcodecanvasg {
+  height: 400px;
+}  
+
+#barcodecanvasg {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+#result {
+  font-family: verdana;
+  font-size: 1.5em;
+}
+
+#barcode {
+  position: relative;
+}  
+
+#barcodecanvas {
+  display: none;
+}
+
 
 /*Navigation Bar Top*/
 .navbar-inverse {
@@ -334,26 +358,26 @@ select {
 }
 
 .handmatig {
-    padding: 3px;
+    padding: 0.3%;
     height: 100%;
     width: 24%;
     float: left;
-    background-color: #403E3E;
+    background-color: white;
     border-radius: 10px;
-    color: #bfffff;
-    border: 1px solid #bfffff;
+    color: black;
+    border: 3px solid black;
 }
 
 .scannen {
-    padding: 2%;
+    padding: 1.5% 2% 2% 2%;
+    margin: 1px;
     height: 100%;
     width: 74%;
     float: right;
-    background-color: #403E3E;
-    margin: 0px;
+    background-color: white;
     border-radius: 10px;
-    color: #bfffff;
-    border: 1px solid #bfffff;
+    color: black;
+    border: 3px solid black;
 }
 
 .handmatig:hover {
@@ -429,13 +453,13 @@ select {
 
 /*footer*/
     .handmatig{
-        padding: 5px;
+        padding: 0.3%;
         height: 100%;
         width: 24%;
         float: left;
     }
     .scannen{
-        padding: 13px;
+        padding: 1.5% 2% 2% 2%;
         height: 100%;
         width: 74%;
         float: right;
@@ -455,7 +479,7 @@ select {
     
     
 /* iPhone 6 */
-@media (min-width: 375px) and (max-width: 522px) {
+@media (min-width: 374px) and (max-width: 522px) {
     .achtergrond {
       width: 350px;
       height: 149px;
