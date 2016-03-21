@@ -1,4 +1,5 @@
 ﻿@{
+   if (!WebSecurity.IsAuthenticated){Response.Redirect("~/Scanner");}
     Layout = "~/_SiteLayout.cshtml";
 }
 
@@ -37,4 +38,4 @@ $(document).ready(function() {
 <canvas id="barcodecanvas" ></canvas>
 <div id="result"></div>
 
-
+<a href="~/Koelkast"> <div class="terug">Terug naar alle producten.</div> </a>
