@@ -43,20 +43,17 @@ else{
 
       <form method="post">
         <fieldset>
-        <legend></legend> 
+       <!-- <legend>Informatie Product</legend> -->
 
-        <div id="Delete-id">
-            <h3 style="color: black">Weet u zeker dat u dit product uit de koelkast wilt verwijderen?</h3>
         <p><span>Product: </span>
          <span>@Product</span></p>
 
         <p><span>Aantal: </span>
          <span>@Aantal</span></p>
-        </div>
+
 
         <input type="hidden" name="movieid" value="@ProductID" />
-            <br>
-        <p><input class="Submit-Btns" id="Delete-Btn" type="submit" name="buttonDelete" value="Verwijder Product" /></p>
+        <p><input type="submit" name="buttonDelete" value="Verwijder Product" /></p>
         </fieldset>
       </form>
-<a class="Link-Btn" href="~/Koelkast"><p class="Submit-Btns">Terug</p></a>
+<p><a href="~/Koelkast">Terug</a></p>
