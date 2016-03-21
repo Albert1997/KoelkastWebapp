@@ -15,6 +15,30 @@ body{
     color: #777777;
 }
 
+/*Div for deleting items*/
+#Delete-id {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #bfffff;
+    color: rgb(122, 106, 106);
+    font-size: 1.3em;
+    box-shadow: 2px 4px 6px grey;
+}
+
+/*Select Dropdown*/
+select {
+   background-color: #7abfbf;
+    width: 150px;
+    padding: 3px;
+    border: 1px solid #e7e6e6;
+    border-radius: 3px;
+    color: white;
+} 
+
+
+
 /*Navigation Bar Top*/
 .navbar-inverse {
     background-image: none;
@@ -75,9 +99,9 @@ body{
     border: none;
     border-radius: 0px;
     color: #fff;
-    margin-left: 7px; 
-    margin-right: 7px;
-    width: 30%;
+    /*margin-left: 7px; 
+    margin-right: 7px;*/
+    width: 100%;
     padding: 3px;
     transition: box-shadow 0.4s;
 }
@@ -88,6 +112,13 @@ body{
 
 
 /*Buttons*/
+#Delete-Btn:hover {
+    background-color: #f25151;
+}
+
+#Edit-Btn:hover {
+    background-color: rgb(40, 179, 81);
+}
 .btn-success{
     background-color: #219E9D;
     border: none;
@@ -119,16 +150,38 @@ body{
     border: 1px solid rgb(168, 170, 169);
     font-family: verdana;
     font-size: 13px;
-    transition: background-color 0.5s, color 0.5s;
+    transition: background-color 0.5s, color 0.5s, box-shadow 0.4s;
     text-align: center;
     width: 100%;
     margin-top: 10px;
+    text-decoration: none;
 }
 
-.Submit-Btns:hover {
+
+.Search-Btns:hover, .Submit-Btns:hover {
     background-color: #bfffff;
     color: black;
+    text-decoration: none;
+    box-shadow: 1px 3px 4px grey;
 }
+
+.GoBack-Btn {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 30px;
+    
+}
+
+
+/*Links*/
+.Link-Btn {
+    text-decoration: none;
+}
+
+.Link-Btn:hover, .Link-Btn:active, .Link-Btn:focus  {
+    text-decoration: none;
+}
+
 
 /*Navbar-Top Links*/
 .navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav > li > a{
@@ -141,17 +194,21 @@ body{
 
 
 /*Search Div Koelkast-Page*/
-.titel {
+.Search-div {
     margin: 0 auto;
     text-align: center;
     border: 1px solid #c8c8c8;
     background-color: #bfffff;
     border-radius: 7px;
-    width: 70%;
+    width: 100%;
     padding-bottom: 10px;
     margin-top: 10px;
+    margin-bottom: 20px;
+    box-shadow: 2px 4px 6px grey;
 }
 
+
+/* Voor de koelkastpagina */
 /*Product div's*/
 .achtergrond {
     color: #fff;
@@ -164,15 +221,6 @@ body{
     border-radius: 5px;
 }
 
-/* Voor de koelkastpagina */
-/*.achtergrond{
-    color: #fff;
-    margin: 0 auto;
-    background-color: #BFFFFF ;
-    width: 681px;
-    height: 192px;
-    margin-top: 25px;
-}*/
 
 .afbeelding{
     width: 192px;
@@ -187,12 +235,6 @@ body{
     height: 100%;
 }
 
-.terug{
-    width: 20%;
-    height: auto;
-    background-color: white;
-    position: absolute;
-}
 
 .productachtergrond{
     width: 453px;
@@ -280,12 +322,8 @@ body{
     margin-left: 45px;
 }
 
-/*.titel{
-    margin: 0 auto;
-    text-align: center;
-    width: 100%;
-}*/
 
+/*Footer*/
 .toevoegen{
     font-size: 15px;
     text-align: center;
@@ -349,105 +387,261 @@ body{
 }
 
 
-/* Koelkast  */
-@media (max-width: 768px) {
+/* iPad */    
+@media (min-width: 523px) and (max-width: 767px) {
+    .achtergrond {
+      width: 500px;
+      height: 180px;
+    }
+    .afbeelding {
+      width: 180px;
+      height: 180px;  
+      margin-left: 0px; 
+    }
+    .productachtergrond {
+        width:  320px;
+        height: 110px;
+        margin: 0px;
+    }
+    .naam {
+        width:  50%;
+        margin-left: 20px;
+    }
+    .aantal {
+        width:  30%;
+        padding-top: 6px;
+        padding-right: 20px;
+    }
+    .hoeveelheid {
+        width:  50%;
+        margin-left: 20px;
+    }
+    .knoppen {
+        width: 320px;
+        margin:  0px;
+    }
+    .verwijderen {
+        width:  159px;
+        height: 68px;
+        margin-top: 2px;
+        margin-bottom: 0px;
+        margin-left: 0px;
+        margin-right: 1px;
+        padding-top: 20px;
+    }
+    .aanpassen {
+        width:  159px;
+        height: 68px;
+        margin-top: 2px;
+        margin-bottom: 0px;
+        margin-left: 1px;
+        margin-right: 0px;
+        padding-top: 20px;
+    }  
+
+/*footer*/
+    .handmatig{
+        padding: 5px;
+        height: 100%;
+        width: 24%;
+        float: left;
+    }
+    .scannen{
+        padding: 13px;
+        height: 100%;
+        width: 74%;
+        float: right;
+    }
     .toevoegen{
-    width: 100%;
+        font-size: 15px;
+        text-align: center;
+        width: 100%;
+        margin: 0 auto;
+        height: 48px;
+    }
+
+
+  
 }
+
     
-    .productachtergrond{
-  left: 0;
-} 
-   
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
+    
+/* iPhone 6 */
+@media (min-width: 375px) and (max-width: 522px) {
     .achtergrond {
-      width: 40%;
+      width: 350px;
+      height: 149px;
     }
-    .afbeelding {
-      width: 30%;
+    .afbeelding {     
+      width: 149px;
+      height: 149px;
+      margin-left: 0px;
     }
     .productachtergrond {
-        width:  60%;
+        width:  201px;
+        height: 65px;
+        margin-right: 0px;
+        margin-top: 0px;
+        margin-left: 0px;
+        margin-bottom: 0px;
     }
     .naam {
-        width:  30%;
+        font-size: 10px;
+        width:  50%;
     }
-    .aantal {
+    .aantal {   
         width:  30%;
     }
     .hoeveelheid {
-        width:  30%;
+        font-size: 10px;
+        width:  50%;
     }
     .knoppen {
-        width: 60%;
+        width: 201px;
+        margin-right:0px;
+        margin-top: 2px;
+        
     }
     .verwijderen {
-        width:  45%;
+        width:  100%;
+        font-size: 13px;
+        height: 40px;
     }
     .aanpassen {
-        width:  45%;
+        margin-top: 2px;
+        width:  100%;
+        font-size: 13px;
+        height: 40px;
+        float:  left;
     }    
+    .naam{
+        font-size: 15px;
+        height: 30px;
+        width: 100px;
+        float: left;
+        margin-left: 10px;
+        margin-top: 5px; 
+        margin-bottom: 0px;      
+    }
+    .aantal{
+        font-size: 30px;
+        height:35px;
+        width: 50px;
+        text-align: right;
+        float: right;
+        margin-right:10px;
+        margin-top: 10px;
+    }   
+    .hoeveelheid{
+        font-size: 12px;
+        width: 100px;
+        height: 25px;
+        float: left;
+        margin-left: 10px;
+        margin-top: 0px;
+    }
+
+
+/*footer*/
+    .handmatig{
+        padding: 5px;
+        height: 100%;
+        width: 24%;
+        float: left;
+    }
+    .scannen{
+        padding: 13px;
+        height: 100%;
+        width: 74%;
+        float: right;
+    }
+    .toevoegen{
+        font-size: 15px;
+        text-align: center;
+        color: #fff;
+        width: 100%;
+        margin: 0 auto;
+        height: 48px;
+    }
+    
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
+/* iPhone 5 */
+@media (max-width: 374px) {
     .achtergrond {
-      width: 70%;
+      width: 260px;
+      height: 149px;
     }
-    .afbeelding {
-      width: 30%;
+    .afbeelding {     
+      width: 149px;
+      height: 149px;
+      margin-left: 0px;
     }
     .productachtergrond {
-        width:  60%;
+        width:  111px;
+        height: 65px;
+        margin-right: 0px;
+        margin-top: 0px;
+        margin-left: 0px;
+        margin-bottom: 0px;
+        padding: 0px;
     }
     .naam {
-        width:  30%;
+        font-size: 15px;
+        width:  40%;
+        margin-left: 5px;
+        margin-top: 5px;
+        margin-bottom: -5px;
     }
-    .aantal {
+    .aantal {   
+        font-size: 20px;
         width:  30%;
+        margin-right: 5px;
+        margin-top: 15px;
     }
     .hoeveelheid {
-        width:  30%;
+        font-size: 12px;
+        width:  40%;
+        margin-left: 5px;
     }
     .knoppen {
-        width: 60%;
+        width: 111px;
+        margin-right:0px;
+        margin-top: 2px;
+        
     }
     .verwijderen {
-        width:  45%;
+        width:  100%;
+        font-size: 13px;
+        height: 40px;
     }
     .aanpassen {
-        width:  45%;
+        margin-top: 2px;
+        width:  100%;
+        font-size: 13px;
+        height: 40px;
+        float:  left;
     }    
-}
 
-
-@media (min-width: 500px) and (max-width: 767px) {
-    .achtergrond {
-      width: 100%;
+/*footer*/
+    .handmatig{
+        padding: 5px;
+        height: 100%;
+        width: 24%;
+        float: left;
     }
-    .afbeelding {
-      width: 30%;
+    .scannen{
+        padding: 13px;
+        height: 100%;
+        width: 74%;
+        float: right;
     }
-    .productachtergrond {
-        width:  60%;
+    .toevoegen{
+        font-size: 15px;
+        text-align: center;
+        width: 100%;
+        margin: 0 auto;
+        height: 48px;
     }
-    .naam {
-        width:  30%;
-    }
-    .aantal {
-        width:  30%;
-    }
-    .hoeveelheid {
-        width:  30%;
-    }
-    .knoppen {
-        width: 60%;
-    }
-    .verwijderen {
-        width:  45%;
-    }
-    .aanpassen {
-        width:  45%;
-    }    
+    
 }

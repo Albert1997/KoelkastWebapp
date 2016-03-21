@@ -28,7 +28,7 @@ var searchTerm = "";
     //var dataSelected = db.Query(selectCommands, searchTerm);
 }
 
-<div class="titel">
+<div class="Search-div">
     <h1>Online Koelkast-Manager</h1>
 
 <form method="get">
@@ -38,9 +38,10 @@ var searchTerm = "";
     <input type="Submit" value="Zoek product" /><br/>
     </div>
 </form>
+    
 </div>
 
-      @if (search.Contains("search")){<a href="~/Koelkast"> <div class="terug">Terug naar alle producten.</div> </a> }
+      
 
           </div>
 </form>
@@ -63,3 +64,4 @@ var searchTerm = "";
     </div> 
 </div>
 }
+@if (search.Contains("search")){<a class="Link-Btn" href="~/Koelkast"> <div class="Submit-Btns GoBack-Btn">Terug naar alle producten.</div> </a> }
