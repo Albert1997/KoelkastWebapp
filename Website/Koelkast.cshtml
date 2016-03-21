@@ -34,8 +34,10 @@ var searchTerm = "";
 <form method="get">
   <div>
     <label for="searchProduct"></label>
-    <input type="text" name="searchProduct" value="@Request.QueryString["searchProduct"]" />
-    <input type="Submit" value="Zoek product" /><br/>
+      <br>
+    <input class="Search-Form" type="text" name="searchProduct" value="@Request.QueryString["searchProduct"]" />
+      <br>
+    <input class="Search-Btns" type="Submit" value="Zoek product" /><br/>
     </div>
 </form>
     
