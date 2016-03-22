@@ -8,7 +8,7 @@
       Response.Redirect("~/Account/Login");
     }  
      
-var searchTerm = "";
+    var searchTerm = "";
     var Email = WebSecurity.CurrentUserName;
     var db = Database.Open("StarterSite");
     var codevanuser = "SELECT Koelkastnr FROM Userprofile WHERE LOWER(Email) = LOWER(@0)";
@@ -21,10 +21,38 @@ var searchTerm = "";
     var selectCommands = "SELECT * FROM Product WHERE Koelkastnr = @1";
     
 
-            if(!Request.QueryString["searchProduct"].IsEmpty() ) {
+    if(!Request.QueryString["searchProduct"].IsEmpty()) 
+    {
         selectCommands = "SELECT * FROM Product WHERE Product LIKE @0 AND Koelkastnr = @1";
         searchTerm = "%" + Request.QueryString["searchProduct"] + "%";
     }
+
+    var selectcount = "Select Aantal FROM Product WHERE ProductId=@0";
+   // var countplus = db.Query(selectcount);
+
+    
+    if (IsPost && !Request.Form["Action"].IsEmpty())
+    {
+        string action = Request.Form["Action"];
+        if (action == "PlusProduct" &&
+            Request.Form["productId"].IsInt())
+        {    
+            var ProductID = Request.Form["productid"];
+            var countplus = Convert.ToInt32(Request.Form["aantal"]) + 1;
+            var updateCommand = "UPDATE Product SET Aantal=@0 WHERE ProductID=@1";
+            db.Execute(updateCommand, countplus, ProductID);
+        }
+
+        if (action == "MinProduct" &&
+            Request.Form["productId"].IsInt())
+        {    
+            var ProductID = Request.Form["productid"];
+            var countplus = Convert.ToInt32(Request.Form["aantal"]) - 1;
+            var updateCommand = "UPDATE Product SET Aantal=@0 WHERE ProductID=@1";
+            db.Execute(updateCommand, countplus, ProductID);
+        }
+    }
+   
     //var dataSelected = db.Query(selectCommands, searchTerm);
 }
 
@@ -56,11 +84,29 @@ var searchTerm = "";
     <div class="product">
         <div class="productachtergrond">
             <div class="naam">@row.Product</div>
-            <div class="aantal">@row.Aantal</div>
-            <div class="hoeveelheid">@row.Hoeveelheid</div>
+            <div class="aantal">
+                <form method="post">
+                <input type="hidden" name="productId" value="@Convert.ToInt32(@row.ProductId)" />
+                <input type="hidden" name="aantal" value="@row.Aantal"/>
+                <button name="Action" value="PlusProduct">+</button>
+                </form>
+                    @row.Aantal
+                    
+                <form method="post">
+                <input type="hidden" name="productId" value="@Convert.ToInt32(@row.ProductId)" />
+                <input type="hidden" name="aantal" value="@row.Aantal"/>
+                <button name="Action" value="MinProduct">-</button>
+                </form>
+            </div>
+            <div class="hoeveelheid">
+
+            
+@row.Hoeveelheid
+            </div>
         </div>
         <div class="knoppen">
             <a href="~/Delete?id=@row.ProductID"><div class="verwijderen">Verwijderen</div></a>
+            
             <a href="~/Edit?id=@row.ProductID"><div class="aanpassen">Aanpassen</div></a>
         </div>
     </div> 
