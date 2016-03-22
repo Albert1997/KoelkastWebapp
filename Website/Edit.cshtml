@@ -36,9 +36,19 @@
     if(IsPost){
         Validation.RequireField("Product", "Je moet een product naam kiezen");
         Validation.RequireField("Aantal", "Kies een Aantal");
+        Validation.Add("Aantal", Validator.Integer("U mag alleen cijfers gebruiken voor aantal eenheden"));
         Validation.RequireField("Hoeveelheid", "Kies een Hoeveelheid");
         Validation.RequireField("ProductID", "Geen product gevonden!");
-
+        Validation.Add("Product",
+        Validator.StringLength(
+            maxLength: 20,
+            minLength: 1,
+            errorMessage: "U mag maximaal 20 tekens gebruiken"));
+        Validation.Add("Aantal",
+        Validator.StringLength(
+            maxLength: 2,
+            minLength: 1,
+            errorMessage: "U mag maximaal 99 eenheden toevoegen"));
 
             
 
