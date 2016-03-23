@@ -322,29 +322,58 @@ select {
 .naam{
     font-size: 25px;
     height: 30px;
-    width: 270px;
+    width: 220px;
     float: left;
     margin-left: 45px;
-    margin-top: 26px;
+    margin-top: 17px;
 }
-
-.aantal{
-    font-size: 30px;
-    height:35px;
-    width: 125px;
-    text-align: right;
-    float: right;
-    margin-right:7px;
-    margin-top: 25px;
-}
-
 .hoeveelheid{
     font-size: 15px;
-    width: 200px;
+    width: 100px;
     height: 25px;
     float: left;
     margin-left: 45px;
 }
+
+/*plus min knop en getal wat aantal eenheden aangeeft*/
+.aantal{
+    
+    height: 80px;
+    width: 75px;   
+    float: right;
+    margin-right:15px;
+    margin-top: 6px;
+}
+.cijfer {
+    font-size: 30px;
+    float: left;
+    margin-top: 17px;
+}
+.plusmin {
+    font-size: 20px;
+    color:  white;
+    float: right;
+    width: 30px;
+    height: 80px;
+    margin-right: -10px;
+    text-align: center;
+}
+.plus {
+    float: right;
+    width: 40px;
+    height: 40px;
+    background-color: #7ABFBF;
+    border-radius: 8px 8px 0 0;
+}
+.min {
+    float: right;
+    width: 40px;
+    height: 40px;
+    background-color: #7ABFBF;
+    border-radius: 0 0 8px 8px;
+}
+
+
 
 
 /*Footer*/
@@ -398,6 +427,8 @@ select {
     display: none;
 }
 
+/* computermuis */
+
 
 /* iPad */    
 @media (min-width: 523px) and (max-width: 767px) {
@@ -416,16 +447,11 @@ select {
         margin: 0px;
     }
     .naam {
-        width:  50%;
+        width: 190px;
         margin-left: 20px;
-    }
-    .aantal {
-        width:  30%;
-        padding-top: 6px;
-        padding-right: 20px;
+        margin-top: 25px;
     }
     .hoeveelheid {
-        width:  50%;
         margin-left: 20px;
     }
     .knoppen {
@@ -450,6 +476,30 @@ select {
         margin-right: 0px;
         padding-top: 20px;
     }  
+
+/*plus min knop en getal wat aantal eenheden aangeeft*/
+    .aantal {
+        width:  80px;
+        padding-top: 8px;
+    }
+    .cijfer {
+        font-size: 28px;
+        margin-top: 20px;
+    }
+    .plusmin {
+        width: 30px;
+        height: 80px;
+        margin-right: 0px;
+        text-align: center;
+    }
+    .plus {
+        width: 40px;
+        height: 40px;
+    }
+    .min {
+        width: 40px;
+        height: 40px;
+    }
 
 /*footer*/
     .handmatig{
@@ -501,9 +551,6 @@ select {
         font-size: 10px;
         width:  50%;
     }
-    .aantal {   
-        width:  30%;
-    }
     .hoeveelheid {
         font-size: 10px;
         width:  50%;
@@ -529,10 +576,10 @@ select {
     .naam{
         font-size: 15px;
         height: 30px;
-        width: 100px;
+        width: 130px;
         float: left;
         margin-left: 10px;
-        margin-top: 5px; 
+        margin-top: 8px; 
         margin-bottom: 0px;      
     }
     .aantal{
@@ -553,6 +600,32 @@ select {
         margin-top: 0px;
     }
 
+/*plus min knop en getal wat aantal eenheden aangeeft*/
+    .aantal {
+        width:  60px;
+        padding: 0px;
+        margin: 0px;
+    }
+    .cijfer {
+        font-size: 18px;
+        margin-top: 18px;
+    }
+    .plusmin {
+        width: 30px;
+        height: 65px;
+        margin-right: 0px;
+        text-align: center;
+    }
+    .plus {
+        width: 32px;
+        height: 32.5px;
+        border-radius: 0 5px 0 0;
+    }
+    .min {
+        width: 32px;
+        height: 32.5px;
+        border-radius: 0 0 5px 0;
+    }
 
 /*footer*/
     .handmatig{
@@ -608,22 +681,16 @@ select {
         padding: 0px;
     }
     .naam {
-        font-size: 15px;
-        width:  40%;
-        margin-left: 5px;
-        margin-top: 5px;
+        font-size: 14px;
+        width:  64px;
+        margin-left: 2px;
+        margin-top: 2px;
         margin-bottom: -5px;
-    }
-    .aantal {   
-        font-size: 20px;
-        width:  30%;
-        margin-right: 5px;
-        margin-top: 15px;
     }
     .hoeveelheid {
         font-size: 12px;
-        width:  40%;
-        margin-left: 5px;
+        width:  64px;
+        margin-left: 2px;
     }
     .knoppen {
         width: 111px;
@@ -643,6 +710,35 @@ select {
         height: 40px;
         float:  left;
     }    
+
+/*plus min knop en getal wat aantal eenheden aangeeft*/
+    .aantal {
+        height: 65px;
+        width:  45px;
+        padding: 0px;
+        margin: 0px;
+    }
+    .cijfer {
+        font-size: 16px;
+        margin-top: 20px;
+    }
+    .plusmin {
+        font-size: 18px;
+        width: 25px;
+        height: 65px;
+        margin-right: 0px;
+        text-align: center;
+    }
+    .plus {
+        width: 25px;
+        height: 32.5px;
+        border-radius: 0 5px 0 0;
+    }
+    .min {
+        width: 25px;
+        height: 32.5px;
+        border-radius: 0 0 5px 0;
+    }
 
 /*footer*/
     .handmatig{
