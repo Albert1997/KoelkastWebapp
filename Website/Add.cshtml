@@ -37,7 +37,12 @@
 
             Product = Request.Form["Product"];
             Aantal = Request.Form["Aantal"];
-            Afbeelding = Request.Form["Afbeelding"];
+            if (Request.Form["Afbeelding"].IsEmpty()) {
+                Afbeelding = Product + ".jpg";
+            }
+            else {          
+               Afbeelding = Request.Form["Afbeelding"];
+            }
             Hoeveelheid = Request.Form["Hoeveelheid"];
 
         if(Validation.IsValid()){
