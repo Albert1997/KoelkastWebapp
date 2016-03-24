@@ -1,5 +1,5 @@
 ﻿@{
-   if (!WebSecurity.IsAuthenticated){Response.Redirect("~/Scanner");}
+   if (!WebSecurity.IsAuthenticated){Response.Redirect("~/Account/login");}
     Layout = "~/_SiteLayout.cshtml";
 }
 
