@@ -19,7 +19,19 @@
     if(IsPost){
         Validation.RequireField("Product", "Je moet een product naam kiezen");
         Validation.RequireField("Aantal", "Kies een Aantal");
+        Validation.Add("Aantal", Validator.Integer("U mag alleen cijfers gebruiken voor aantal eenheden"));
         Validation.RequireField("Hoeveelheid", "Kies een Hoeveelheid");
+        Validation.Add("Product",
+        Validator.StringLength(
+            maxLength: 20,
+            minLength: 1,
+            errorMessage: "U mag maximaal 20 tekens gebruiken"));
+        Validation.Add("Aantal",
+        Validator.StringLength(
+            maxLength: 2,
+            minLength: 1,
+            errorMessage: "U mag maximaal 99 eenheden toevoegen"));
+        
 
             Product = Request.Form["Product"];
             Aantal = Request.Form["Aantal"];
@@ -27,15 +39,17 @@
             {
                 Afbeelding = Request.Form["Afbeelding"];
             }
+            else if (Request.Form["Afbeelding"].IsEmpty())
+            {
+                Afbeelding = Product + ".jpg";
+            }
             else
             {
                 Afbeelding = map + Request.Form["Afbeelding"];
             }
-            
             Hoeveelheid = Request.Form["Hoeveelheid"];
 
         if(Validation.IsValid()){
-            
 
             
             var insertCommand = "INSERT INTO Product (Product, Koelkastnr, Aantal, Afbeelding, Hoeveelheid) VALUES(@0, @1, @2, @3, @4)";
@@ -46,6 +60,7 @@
         }
     }
 }
+
 <h1>Voeg een product toe</h1>
     @Html.ValidationSummary()
   <form method="post">
