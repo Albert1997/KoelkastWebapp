@@ -13,6 +13,8 @@
     var codevanuser = "SELECT Koelkastnr FROM Userprofile WHERE LOWER(Email) = LOWER(@0)";
     if(Email == ""){Response.Redirect("~/Account/Login");};
     var decodevanbelang = db.QueryValue(codevanuser, Email);
+    string map = "/Images/Productafbeeldingen/";
+
 
     if(IsPost){
         Validation.RequireField("Product", "Je moet een product naam kiezen");
@@ -21,7 +23,15 @@
 
             Product = Request.Form["Product"];
             Aantal = Request.Form["Aantal"];
-            Afbeelding = Request.Form["Afbeelding"];
+            if(Functions.CheckURLValid(Request.Form["Afbeelding"]))
+            {
+                Afbeelding = Request.Form["Afbeelding"];
+            }
+            else
+            {
+                Afbeelding = map + Request.Form["Afbeelding"];
+            }
+            
             Hoeveelheid = Request.Form["Hoeveelheid"];
 
         if(Validation.IsValid()){

@@ -44,7 +44,15 @@
 
         Product = Request.Form["Product"];
         Aantal = Request.Form["Aantal"];
-        Afbeelding = Request.Form["Afbeelding"];
+        if(Functions.CheckURLValid(Request.Form["Afbeelding"]))
+            {
+                Afbeelding = Request.Form["Afbeelding"];
+            }
+            else
+            {
+                Afbeelding = map + Request.Form["Afbeelding"];
+            }
+
         Hoeveelheid = Request.Form["Hoeveelheid"];
         ProductID = Request.Form["ProductID"];
 
@@ -83,7 +91,7 @@
         
       <input type="hidden" name="ProductID" value="@ProductID" />
         </div>
-      <p><input class="Submit-Btns" id="Edit-Btn" type="submit" name="buttonSubmit" value="Aanpassen" /></p>
+      <p><input class="Submit-btn" id="Edit-btn" type="submit" name="buttonSubmit" value="Aanpassen" /></p>
     </fieldset>
   </form>
-  <a class="Link-Btn" href="~/Koelkast"><p class="Submit-Btns">Terug</p></a>
+  <a class="Link-btn" href="~/Koelkast"><p class="Submit-btn">Terug</p></a>
