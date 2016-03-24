@@ -1,17 +1,42 @@
 ﻿@{
-   if (!WebSecurity.IsAuthenticated){Response.Redirect("~/Scanner");}
+   if (!WebSecurity.IsAuthenticated){Response.Redirect("~/Acount/Login");}
     Layout = "~/_SiteLayout.cshtml";
-}
 
+    var ean = "";
+    var Product = "";
+    var Aantal = "";
+    var Afbeelding = "";
+    
+
+    var db = Database.Open("StarterSite");
+        /*Koelkast word opgehaalt*/
+        var Email = WebSecurity.CurrentUserName;
+        var codevanuser = "SELECT Koelkastnr FROM Userprofile WHERE LOWER(Email) = LOWER(@0)";
+        var decodevanbelang = db.QueryValue(codevanuser, Email);
+
+        var productnaamvanean = "SELECT Productnaam FROM Ean WHERE EanId = @0";
+        var afbeeldingvanean = "SELECT Productnaam FROM Ean WHERE EanId = @0";
+   
+    if(IsPost)
+    {
+        Product = db.QueryValue(productnaamvanean,ean);
+        Aantal = Request.Form["Aantal"];
+        Afbeelding = db.QueryValue(afbeeldingvanean,ean);
+           if(Validation.IsValid())
+           {
+                var insertCommand = "INSERT INTO Product (Product, Koelkastnr, Afbeelding, Aantal) VALUES(@0, @1, @2, @3)";  
+                db.Execute(insertCommand, Product, decodevanbelang, Afbeelding, Aantal);
+                Response.Redirect("~/Koelkast");
+            }
+    }
+    
+}
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="barcode.js"></script>
-
 <script type="text/javascript">
-
 var sound = new Audio("barcode.wav");
 
 $(document).ready(function() {
-
 	barcode.config.start = 0.1;
 	barcode.config.end = 0.9;
 	barcode.config.video = '#barcodevideo';
@@ -23,19 +48,27 @@ $(document).ready(function() {
 	barcode.init();
 
 	$('#result').bind('DOMSubtreeModified', function(e) {
-		sound.play();	
+		sound.play();
 	});
-
 });
-
 </script>
-
 
 <div id="barcode">
 	<video id="barcodevideo" autoplay></video>
 	<canvas id="barcodecanvasg" ></canvas>
 </div>
-<canvas id="barcodecanvas" ></canvas>
+<canvas id="barcodecanvas"></canvas>
 <div id="result"></div>
 
-<a href="~/Koelkast"> <div class="terug">Terug naar alle producten.</div> </a>
+<h1>Voeg een product toe</h1>
+    @Html.ValidationSummary()
+  <form method="post">
+    <fieldset>
+      <legend>Product</legend>
+      <p><label for="Aantal">Aantal:</label>
+         <input class="Forms" type="text" name="Aantal" value="@Aantal" /></p>
+      <p><input type="submit" name="buttonSubmit" value="Toevoegen" /></p>
+    </fieldset>
+  </form>
+
+<a href="~/Koelkast"><div class="terug">Terug naar alle producten.</div></a>
