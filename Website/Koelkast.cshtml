@@ -90,6 +90,7 @@
                 </div>          
                <div class="plusmin">
                 <form method="post">
+                    @*<input id="productForm" type="text" name="aantalProducten" value="@row.Aantal"/>*@
                     <input type="hidden" name="productId" value="@Convert.ToInt32(@row.ProductId)" />
                     <input type="hidden" name="aantal" value="@row.Aantal"/>
                     <button class="plus" name="Action" value="PlusProduct">+</button>

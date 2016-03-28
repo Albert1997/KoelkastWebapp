@@ -58,6 +58,10 @@
             {
                 Afbeelding = Request.Form["Afbeelding"];
             }
+            else if (Request.Form["Afbeelding"].Contains(map))
+            {
+                Afbeelding = Request.Form["Afbeelding"];
+            }
             else
             {
                 Afbeelding = map + Request.Form["Afbeelding"];
