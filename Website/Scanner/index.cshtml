@@ -13,7 +13,6 @@
         var Email = WebSecurity.CurrentUserName;
         var codevanuser = "SELECT Koelkastnr FROM Userprofile WHERE LOWER(Email) = LOWER(@0)";
         var decodevanbelang = db.QueryValue(codevanuser, Email);
-
         var productnaamvanean = "SELECT Productnaam FROM Ean WHERE EanId = @0";
         var afbeeldingvanean = "SELECT Productnaam FROM Ean WHERE EanId = @0";
   
@@ -43,17 +42,22 @@
         Afbeelding = db.QueryValue(afbeeldingvanean,ean);
 
         if(Validation.IsValid()){
-        if(Product == null){Response.Redirect("~/Account/Login");}
+        if(Product == null || Product.IsEmpty()){Response.Redirect("~/ProductAdd");}
+
         else{
             
                 var insertCommand = "INSERT INTO Product (Product, Koelkastnr, Afbeelding, Aantal) VALUES(@0, @1, @2, @3)";  
                 db.Execute(insertCommand, Product, decodevanbelang, Afbeelding, Aantal);
                 Response.Redirect("~/Koelkast");
-            
-}
-        }       }
 
+        }
+    }
+           
 }
+}              
+
+
+
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="barcode.js"></script>
 <script type="text/javascript">
@@ -74,12 +78,13 @@ var sound = new Audio("barcode.wav");
         $('#result').bind('DOMSubtreeModified', function (e) {
 		sound.play();	
 	});
+
 });
 </script>
 
 <div id="barcode">
-	<video id="barcodevideo" autoplay></video>
-	<canvas id="barcodecanvasg" ></canvas>
+  <video id="barcodevideo" autoplay></video>
+  <canvas id="barcodecanvasg" ></canvas>
 </div>
 <canvas id="barcodecanvas" ></canvas>
 <div id="result"></div>
