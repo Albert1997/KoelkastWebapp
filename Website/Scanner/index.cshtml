@@ -19,24 +19,56 @@
   
     if(IsPost)
     {
+        Validation.RequireField("Ean", "Je moet een ean-code invoeren");
+        Validation.Add("Ean", Validator.Integer("U mag alleen cijfers gebruiken voor de ean-code"));
+        Validation.RequireField("Aantal", "Kies een Aantal");
+        Validation.Add("Aantal", Validator.Integer("U mag alleen cijfers gebruiken voor aantal eenheden"));
+        Validation.Add("Ean",
+        Validator.StringLength(
+            maxLength: 50,
+            minLength: 1,
+            errorMessage: "U mag maximaal 50 tekens gebruiken voor de ean-code"));
+        Validation.Add("Aantal",
+        Validator.StringLength(
+            maxLength: 2,
+            minLength: 1,
+            errorMessage: "U mag maximaal 99 eenheden toevoegen"));
+
+
+
+
         ean = Request.Form["Ean"];
         Product = db.QueryValue(productnaamvanean,ean);
         Aantal = Request.Form["Aantal"];
         Afbeelding = db.QueryValue(afbeeldingvanean,ean);
 
+
         if(Product == null || Product.IsEmpty()){Response.Redirect("~/ProductAdd");}
+
+        if(Validation.IsValid()){
+        if(Product == null){Response.Redirect("~/Account/Login");}
+
         else{
+            
                 var insertCommand = "INSERT INTO Product (Product, Koelkastnr, Afbeelding, Aantal) VALUES(@0, @1, @2, @3)";  
                 db.Execute(insertCommand, Product, decodevanbelang, Afbeelding, Aantal);
                 Response.Redirect("~/Koelkast");
+
         }
     }
     
+
+            
 }
+               
+
+
+
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="barcode.js"></script>
 <script type="text/javascript">
 var sound = new Audio("barcode.wav");
+
 
 $(document).ready(function() {
   barcode.config.start = 0.2;
@@ -53,6 +85,23 @@ $(document).ready(function() {
   $('#result').bind('DOMSubtreeModified', function(e) {
     sound.play();
   });
+
+    $(document).ready(function () {
+	barcode.config.start = 0.2;
+	barcode.config.end = 0.9;
+	barcode.config.video = '#barcodevideo';
+	barcode.config.canvas = '#barcodecanvas';
+	barcode.config.canvasg = '#barcodecanvasg';
+        barcode.setHandler(function (barcode) {
+            //$('#result').html(barcode);
+            $("input[name=Ean]").attr("value", barcode);
+	});
+	barcode.init();
+
+        $('#result').bind('DOMSubtreeModified', function (e) {
+		sound.play();	
+	});
+
 });
 </script>
 
