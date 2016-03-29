@@ -1,0 +1,23 @@
+﻿@{
+    if (!WebSecurity.IsAuthenticated){Response.Redirect("~/Account/login");}
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Deel hier uw koelkast";
+
+    var Koelkastnr = "";
+    var delen = false;
+    var Email = WebSecurity.CurrentUserName;
+    var db = Database.Open("StarterSite");
+    var codevanuser = "SELECT Koelkastnr FROM Userprofile WHERE LOWER(Email) = LOWER(@0)";
+    if(Email == ""){Response.Redirect("~/Account/Login");};
+    var decodevanbelang = db.QueryValue(codevanuser, Email);
+}
+
+
+<h1>Deel hier uw koelkast</h1>
+        
+
+<p><span>Uw Koelkast nummer: </span>
+         <span>@decodevanbelang</span></p>
+
+<input type="checkbox" id="rememberMe" name="rememberMe" value="true" checked="@delen" />
+                    <label class="checkbox" for="rememberMe">Wilt u uw koelkast deelbaar maken?</label>
