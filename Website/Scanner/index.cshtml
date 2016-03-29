@@ -52,9 +52,7 @@
 
         }
     }
-    
-
-            
+           
 }
 }              
 
@@ -64,23 +62,6 @@
 <script type="text/javascript" src="barcode.js"></script>
 <script type="text/javascript">
 var sound = new Audio("barcode.wav");
-
-
-$(document).ready(function() {
-  barcode.config.start = 0.2;
-  barcode.config.end = 0.9;
-  barcode.config.video = '#barcodevideo';
-  barcode.config.canvas = '#barcodecanvas';
-  barcode.config.canvasg = '#barcodecanvasg';
-  barcode.setHandler(function(barcode) {
-    $('#result').html(barcode);
-        
-  });
-  barcode.init();
-    
-  $('#result').bind('DOMSubtreeModified', function(e) {
-    sound.play();
-  });
 
     $(document).ready(function () {
 	barcode.config.start = 0.2;
