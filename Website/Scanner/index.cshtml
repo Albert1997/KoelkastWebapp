@@ -42,11 +42,8 @@
         Aantal = Request.Form["Aantal"];
         Afbeelding = db.QueryValue(afbeeldingvanean,ean);
 
-
-        if(Product == null || Product.IsEmpty()){Response.Redirect("~/ProductAdd");}
-
         if(Validation.IsValid()){
-        if(Product == null){Response.Redirect("~/Account/Login");}
+        if(Product == null || Product.IsEmpty()){Response.Redirect("~/ProductAdd");}
 
         else{
             
