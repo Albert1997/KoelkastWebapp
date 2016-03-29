@@ -50,10 +50,10 @@
                     <li>
                         @if (WebSecurity.IsAuthenticated)
                         {
-                            <form id="logoutForm" action="~/Account/Logout" method="post" class="form-horizontal">
-                                <a class="email" href="~/Account/Manage" title="Manage">@WebSecurity.CurrentUserName</a> |
+                            <form style="margin-top: 15px;" id="logoutForm" action="~/Account/Logout" method="post" class="form-horizontal">
+                                <a class="email Log-btn Email-btn" href="~/Account/Manage" title="Manage">@WebSecurity.CurrentUserName</a> 
                                 @AntiForgery.GetHtml()
-                                <a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
+                                    <a class="Log-btn" href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
                             </form>
                         }
                         else
@@ -66,7 +66,7 @@
                                 <div class="form-group">
                                     <input type="password" name="password" placeholder="Password" class="form-control">
                                 </div>
-                                <button type="submit" class="btn btn-success">Sign in</button>
+                                <button type="submit" class="Log-btn">Sign in</button>
                             </form>
                         }
                     </li>
@@ -86,7 +86,7 @@
     @* footer *@
     <div class="navbar navbar-default navbar-fixed-bottom">
         <div class="container">
-           @if (koelkast.Contains("/Koelkast") || koelkast.Contains("/Add") || koelkast.Contains("/Edit") || koelkast.Contains("/Delete")){
+           @if (koelkast.Contains("/Koelkast") || koelkast.Contains("/Add") || koelkast.Contains("/Scanner") ||koelkast.Contains("/Edit") || koelkast.Contains("/Delete")){
             <div class="toevoegen">
                 <a href="~/Add">
                     <div class="handmatig">HANDMATIG<br> TOEVOEGEN</div>

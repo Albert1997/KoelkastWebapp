@@ -69,8 +69,8 @@ var barcode = function() {
 		elements.ctxg = elements.canvasg.getContext('2d');
 
 		if (navigator.getUserMedia) {
-			navigator.getUserMedia({audio: false, video: true}, function(stream) {
-				elements.video.src = window.URL.createObjectURL(stream);
+			navigator.getUserMedia({audio: false, video: true}, function(localMediaStream) {
+				elements.video.src = window.URL.createObjectURL(localMediaStream);
 			}, function(error) {
 				console.log(error);
 			});
@@ -352,4 +352,4 @@ var barcode = function() {
 		}
 	}
 
-}();
+}

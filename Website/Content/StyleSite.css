@@ -15,6 +15,18 @@ body{
     color: #777777;
 }
 
+
+/*Select Dropdown*/
+select {
+   background-color: #7abfbf;
+    width: 150px;
+    padding: 3px;
+    border: 1px solid #e7e6e6;
+    border-radius: 3px;
+    color: white;
+} 
+
+
 .homepagina {
     color: #fff;
     padding: 5px;
@@ -41,16 +53,6 @@ body{
     box-shadow: 2px 4px 6px grey;
 }
 
-/*Select Dropdown*/
-select {
-   background-color: #7abfbf;
-    width: 150px;
-    padding: 3px;
-    border: 1px solid #e7e6e6;
-    border-radius: 3px;
-    color: white;
-} 
-
 
 /*Barcode Scanner*/
 #barcodevideo, #barcodecanvas, #barcodecanvasg {
@@ -74,6 +76,14 @@ select {
 
 #barcodecanvas {
   display: none;
+}
+
+
+/*Responsive h1*/
+@media (max-width: 767px) {
+    h1, .h1 {
+    font-size: 32px;
+}
 }
 
 
@@ -110,6 +120,11 @@ select {
 
 
 /*Forms*/
+#productForm {
+    color: black;
+    width: 100%;
+}
+
 .form-control{
     background-color: #7ABFBF;
     border: none;
@@ -150,11 +165,11 @@ select {
 
 
 /*Buttons*/
-#Delete-Btn:hover {
+#Delete-btn:hover {
     background-color: #f25151;
 }
 
-#Edit-Btn:hover {
+#Edit-btn:hover {
     background-color: rgb(40, 179, 81);
 }
 .btn-success{
@@ -167,7 +182,7 @@ select {
     padding: 7px 20px;
 }
 
-.Search-Btns {
+.Search-btn {
     background-color: rgb(40, 179, 178);
     border-radius: 10px;
     color: white;
@@ -179,7 +194,7 @@ select {
     transition: background-color 0.5s, color 0.5s;
 }
 
-.Submit-Btns {
+.Submit-btn {
     background-color: rgb(40, 179, 178);
     border-radius: 10px;
     color: white;
@@ -195,29 +210,57 @@ select {
     text-decoration: none;
 }
 
-
-.Search-Btns:hover, .Submit-Btns:hover {
+.Search-btn:hover, .Submit-btn:hover {
     background-color: #bfffff;
     color: black;
     text-decoration: none;
     box-shadow: 1px 3px 4px grey;
 }
 
-.GoBack-Btn {
+.GoBack-btn {
     width: 60%;
     margin: 0 auto;
     margin-top: 30px;
+}
+
+.Log-btn  {
+    padding: 7px 20px;
+    color: white;
+    border: 1px solid #7ABFBF;
+    background-color: #7ABFBF;
+    transition: background-color 0.4s;
+    margin-left: 5px;
+    font-family: Arial;
+    font-size: 13px;
     
 }
+    
+.Log-btn:hover, .Log-btn:active, .Log-btn:focus {
+    background-color: #219E9D;
+    border: 1px solid #219E9D;
+    color: white;
+    text-decoration: none;
+    outline: none;
+}
 
+.Email-btn {
+    background-color: #28B3B2;
+    border-color: #28B3B2;  
+}
 
 /*Links*/
-.Link-Btn {
+.Link-btn {
     text-decoration: none;
 }
 
-.Link-Btn:hover, .Link-Btn:active, .Link-Btn:focus  {
+.Link-btn:hover, .Link-btn:active, .Link-btn:focus  {
     text-decoration: none;
+}
+
+/*Images*/
+.Home-img {
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 
@@ -424,11 +467,11 @@ select {
 }
 
 .handmatig:hover {
-    background-color: RGBA(64, 62, 62, 0.81);
+    background-color: #d8fbf2;
 }
 
 .scannen:hover {
-    background-color: RGBA(64, 62, 62, 0.81);
+    background-color: #d8fbf2;
 }
 
 .beschrijving {

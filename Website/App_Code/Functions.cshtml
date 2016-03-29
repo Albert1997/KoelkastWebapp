@@ -15,4 +15,13 @@
         orderedList.InnerHtml = sb.ToString();
         return new HtmlString(orderedList.ToString(TagRenderMode.Normal));
     }
-}
+
+    public static bool CheckURLValid(string source)
+    {
+    Uri uriResult;
+    bool result = Uri.TryCreate(source, UriKind.Absolute, out uriResult)
+              && (   uriResult.Scheme == Uri.UriSchemeHttp 
+                  || uriResult.Scheme == Uri.UriSchemeHttps );
+     return result;
+    }
+}   

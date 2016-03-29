@@ -13,6 +13,8 @@
     var codevanuser = "SELECT Koelkastnr FROM Userprofile WHERE LOWER(Email) = LOWER(@0)";
     if(Email == ""){Response.Redirect("~/Account/Login");};
     var decodevanbelang = db.QueryValue(codevanuser, Email);
+    string map = "/Images/Productafbeeldingen/";
+
 
     if(IsPost){
         Validation.RequireField("Product", "Je moet een product naam kiezen");
@@ -31,22 +33,23 @@
             errorMessage: "U mag maximaal 99 eenheden toevoegen"));
         
 
-        
-
-
-
             Product = Request.Form["Product"];
             Aantal = Request.Form["Aantal"];
-            if (Request.Form["Afbeelding"].IsEmpty()) {
+            if(Functions.CheckURLValid(Request.Form["Afbeelding"]))
+            {
+                Afbeelding = Request.Form["Afbeelding"];
+            }
+            else if (Request.Form["Afbeelding"].IsEmpty())
+            {
                 Afbeelding = Product + ".jpg";
             }
-            else {          
-               Afbeelding = Request.Form["Afbeelding"];
+            else
+            {
+                Afbeelding = map + Request.Form["Afbeelding"];
             }
             Hoeveelheid = Request.Form["Hoeveelheid"];
 
         if(Validation.IsValid()){
-            
 
             
             var insertCommand = "INSERT INTO Product (Product, Koelkastnr, Aantal, Afbeelding, Hoeveelheid) VALUES(@0, @1, @2, @3, @4)";
@@ -57,6 +60,8 @@
         }
     }
 }
+
+
 <h1>Voeg een product toe</h1>
     @Html.ValidationSummary()
   <form method="post">
@@ -80,7 +85,7 @@
             <option value="per 1000 gr">per 1000 gr</option>
         </select>
 
-      <p><input type="submit" name="buttonSubmit" value="Toevoegen" /></p>
+      <p><input type="submit" class="Submit-btn" name="buttonSubmit" value="Toevoegen" /></p>
     </fieldset>
   </form>
-  <p><a href="~/Koelkast">Terug naar de koelkast</a></p>
+  <a class="Link-btn" href="~/Koelkast"><p class="Submit-btn">Terug</p></a>
