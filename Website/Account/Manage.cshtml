@@ -131,32 +131,32 @@
             <text>Set Password Form</text>
         }
         </legend>
-        <ol>
+
             @if (hasLocalAccount) {
-                <li class="current-password">
+                
                     <label for="currentPassword" @if (!ModelState.IsValidField("currentPassword")) {<text>class="error-label"</text>}>Huidig wachtwoord</label>
-                    <input type="password" id="currentPassword" name="currentPassword" @Validation.For("currentPassword")/>
+                    <input type="password" id="currentPassword" class="Forms" name="currentPassword" @Validation.For("currentPassword")/>
                     @Html.ValidationMessage("currentPassword")
-                </li>
+                
             }
-            <li class="new-password">
+
                 <label for="newPassword" @if (!ModelState.IsValidField("newPassword")) {<text>class="error-label"</text>}>Nieuw wachtwoord</label>
-                <input type="password" id="newPassword" name="newPassword" @Validation.For("newPassword")/>
+                <input type="password" id="newPassword" class="Forms" name="newPassword" @Validation.For("newPassword")/>
                 @Html.ValidationMessage("newPassword")
-            </li>
-            <li class="confirm-password">
+
                 <label for="confirmPassword" @if (!ModelState.IsValidField("confirmPassword")) {<text>class="error-label"</text>}>Bevestig wachtwoord</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" @Validation.For("confirmPassword")/>
+                <input type="password" id="confirmPassword" class="Forms" name="confirmPassword" @Validation.For("confirmPassword")/>
                 @Html.ValidationMessage("confirmPassword")
-            </li>
-        </ol>
+                <br>
+                <br>
+        
         @if (hasLocalAccount) {
-            <button type="submit" name="action" value="password">Wijzig wachtwoord</button>
+            <button type="submit" class="Submit-btn" name="action" value="password">Wijzig wachtwoord</button>
             <p>
 
             </p>
         } else {
-            <button type="submit" name="action" value="password">Set Password</button>
+            <button type="submit" class="Submit-btn" name="action" value="password">Set Password</button>
         }
     </fieldset>
 </form>
