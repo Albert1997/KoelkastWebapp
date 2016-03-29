@@ -57,7 +57,7 @@
 }
 
 <div class="Search-div">
-    <h1>Online Koelkast-Manager</h1>
+    <h1 style="color: black">Online Koelkast-Manager</h1>
 
 <form method="get">
   <div>
@@ -65,7 +65,7 @@
       <br>
     <input class="Search-Form" type="text" name="searchProduct" value="@Request.QueryString["searchProduct"]" />
       <br>
-    <input class="Search-Btns" type="Submit" value="Zoek product" /><br/>
+    <input class="Search-btn" type="Submit" value="Zoek product" /><br/>
     </div>
 </form>
     
@@ -80,7 +80,7 @@
 @foreach(var row in db.Query(selectCommands, searchTerm, decodevanbelang))
 {
 <div class="achtergrond">
-    <div class="afbeelding"><img alt="@row.Product" style="width: 100%; height: 100%;" src="@map@row.Afbeelding"></div>
+    <div class="afbeelding"><img alt="@row.Product" style="width: 100%; height: 100%;" src="@row.Afbeelding"></div>
     <div class="product">
         <div class="productachtergrond">
             <div class="naam">@row.Product</div>
@@ -90,6 +90,7 @@
                 </div>          
                <div class="plusmin">
                 <form method="post">
+                    @*<input id="productForm" type="text" name="aantalProducten" value="@row.Aantal"/>*@
                     <input type="hidden" name="productId" value="@Convert.ToInt32(@row.ProductId)" />
                     <input type="hidden" name="aantal" value="@row.Aantal"/>
                     <button class="plus" name="Action" value="PlusProduct">+</button>
@@ -111,4 +112,4 @@
     </div> 
 </div>
 }
-@if (search.Contains("search")){<a class="Link-Btn" href="~/Koelkast"> <div class="Submit-Btns GoBack-Btn">Terug naar alle producten.</div> </a> }
+@if (search.Contains("search")){<a class="Link-btn" href="~/Koelkast"> <div class="Submit-btn GoBack-btn">Terug naar alle producten.</div> </a> }

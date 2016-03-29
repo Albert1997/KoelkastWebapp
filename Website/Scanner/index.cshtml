@@ -1,6 +1,5 @@
 ﻿@{
-   if (!WebSecurity.IsAuthenticated){Response.Redirect("~/Acount/Login");}
-    Layout = "~/_SiteLayout.cshtml";
+   if (!WebSecurity.IsAuthenticated){Response.Redirect("~/Acount/Login");}    Layout = "~/_SiteLayout.cshtml";
 
     var ean = "";
     var Product = "";

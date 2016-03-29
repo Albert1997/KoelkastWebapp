@@ -2821,7 +2821,7 @@ ko.templateRewriting = (function () {
         // anonymous function, even though Opera's built-in debugger can evaluate it anyway. No other browser requires this
         // extra indirection.
         var applyBindingsToNextSiblingScript =
-            "ko.__tr_ambtns(function($context,$element){return(function(){return{ " + rewrittenDataBindAttributeValue + " } })()})";
+            "ko.__tr_ambtn(function($context,$element){return(function(){return{ " + rewrittenDataBindAttributeValue + " } })()})";
         return templateEngine['createJavaScriptEvaluatorBlock'](applyBindingsToNextSiblingScript) + tagToRetain;
     }
 
@@ -2852,7 +2852,7 @@ ko.templateRewriting = (function () {
 
 
 // Exported only because it has to be referenced by string lookup from within rewritten template
-ko.exportSymbol('__tr_ambtns', ko.templateRewriting.applyMemoizedBindingsToNextSibling);
+ko.exportSymbol('__tr_ambtn', ko.templateRewriting.applyMemoizedBindingsToNextSibling);
 (function() {
     // A template source represents a read/write way of accessing a template. This is to eliminate the need for template loading/saving
     // logic to be duplicated in every template engine (and means they can all work with anonymous templates, etc.)
