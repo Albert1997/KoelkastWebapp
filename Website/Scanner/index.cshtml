@@ -39,7 +39,7 @@
 var sound = new Audio("barcode.wav");
 
 $(document).ready(function() {
-	barcode.config.start = 0.1;
+	barcode.config.start = 0.2;
 	barcode.config.end = 0.9;
 	barcode.config.video = '#barcodevideo';
 	barcode.config.canvas = '#barcodecanvas';
@@ -60,9 +60,9 @@ $(document).ready(function() {
 	<video id="barcodevideo" autoplay></video>
 	<canvas id="barcodecanvasg" ></canvas>
 </div>
-<canvas id="barcodecanvas"></canvas>
-
+<canvas id="barcodecanvas" ></canvas>
 <div id="result"></div>
+
 <h1>Scan hier uw product</h1>
     @Html.ValidationSummary()
   <form method="post">
