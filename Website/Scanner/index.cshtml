@@ -1,6 +1,7 @@
 ﻿@{
-   if (!WebSecurity.IsAuthenticated){Response.Redirect("~/Acount/Login");}    Layout = "~/_SiteLayout.cshtml";
-
+   if (!WebSecurity.IsAuthenticated){Response.Redirect("~/Account/Login");}
+    Layout = "~/_SiteLayout.cshtml";
+    
     var ean = "";
     var Product = "";
     var Aantal = "";
@@ -15,18 +16,20 @@
 
         var productnaamvanean = "SELECT Productnaam FROM Ean WHERE EanId = @0";
         var afbeeldingvanean = "SELECT Productnaam FROM Ean WHERE EanId = @0";
-   
+  
     if(IsPost)
     {
+        ean = Request.Form["Ean"];
         Product = db.QueryValue(productnaamvanean,ean);
         Aantal = Request.Form["Aantal"];
         Afbeelding = db.QueryValue(afbeeldingvanean,ean);
-           if(Validation.IsValid())
-           {
+
+        if(Product == null){Response.Redirect("~/Account/Login");}
+        else{
                 var insertCommand = "INSERT INTO Product (Product, Koelkastnr, Afbeelding, Aantal) VALUES(@0, @1, @2, @3)";  
                 db.Execute(insertCommand, Product, decodevanbelang, Afbeelding, Aantal);
                 Response.Redirect("~/Koelkast");
-            }
+        }
     }
     
 }
@@ -43,9 +46,10 @@ $(document).ready(function() {
 	barcode.config.canvasg = '#barcodecanvasg';
 	barcode.setHandler(function(barcode) {
 		$('#result').html(barcode);
+        
 	});
 	barcode.init();
-
+    
 	$('#result').bind('DOMSubtreeModified', function(e) {
 		sound.play();
 	});
@@ -57,16 +61,18 @@ $(document).ready(function() {
 	<canvas id="barcodecanvasg" ></canvas>
 </div>
 <canvas id="barcodecanvas"></canvas>
-<div id="result"></div>
 
-<h1>Voeg een product toe</h1>
+<div id="result"></div>
+<h1>Scan hier uw product</h1>
     @Html.ValidationSummary()
   <form method="post">
     <fieldset>
-      <legend>Product</legend>
+      <legend>Productinformatie</legend>
+      <p><label for="ean">Ean Code:</label>
+        <input class="Forms" type="text" name="Ean" value="@ean"/></p>
       <p><label for="Aantal">Aantal:</label>
-         <input class="Forms" type="text" name="Aantal" value="@Aantal" /></p>
-      <p><input type="submit" name="buttonSubmit" value="Toevoegen" /></p>
+         <input class="Forms" type="text" name="Aantal" value="@Aantal"/></p>
+      <p><input type="submit" name="buttonSubmit" value="Toevoegen"/></p>
     </fieldset>
   </form>
 
