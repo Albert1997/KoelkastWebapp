@@ -40,7 +40,8 @@
                 <ul class="nav navbar-nav navigation-links">
                     <li><a href="~/">Home</a></li>   
                     @if(WebSecurity.IsAuthenticated){                 
-                    <li><a href="~/Koelkast">Koelkast</a></li>}
+                    <li><a href="~/Koelkast">Koelkast</a></li>
+                    <li><a href="~/Delen">Delen</a></li>                                      }
                     @if (!WebSecurity.IsAuthenticated)
                     {
                     <li><a href="~/Account/Register">Registreer</a></li>
