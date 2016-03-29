@@ -1113,9 +1113,24 @@ a:focus {
 figure {
   margin: 0;
 }
+
+/* koelkast plaatje */
+#HomePage-img {
+    width: 100%;
+    opacity: 0.4;
+    border: none;
+    box-shadow: 0 6px 8px grey;
+    border-radius: 0 0 10px 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
 img {
   vertical-align: middle;
 }
+
 .img-responsive,
 .thumbnail > img,
 .thumbnail a > img,

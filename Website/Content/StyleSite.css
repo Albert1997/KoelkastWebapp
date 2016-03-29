@@ -27,6 +27,20 @@ select {
 } 
 
 
+.homepagina {
+    color: #fff;
+    padding: 5px;
+    font-size: 20px; 
+    border: none;
+    box-shadow: 0 6px 8px grey;
+    border-radius: 0 0 10px 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: #28B3B2;
+}
+
 /*Div for deleting items*/
 #Delete-id {
     border: 1px solid black;
@@ -220,7 +234,7 @@ select {
     font-size: 13px;
     
 }
-
+    
 .Log-btn:hover, .Log-btn:active, .Log-btn:focus {
     background-color: #219E9D;
     border: 1px solid #219E9D;
