@@ -352,4 +352,4 @@ var barcode = function() {
 		}
 	}
 
-}();
+}
