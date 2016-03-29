@@ -19,18 +19,39 @@
   
     if(IsPost)
     {
+        Validation.RequireField("Ean", "Je moet een ean-code invoeren");
+        Validation.Add("Ean", Validator.Integer("U mag alleen cijfers gebruiken voor de ean-code"));
+        Validation.RequireField("Aantal", "Kies een Aantal");
+        Validation.Add("Aantal", Validator.Integer("U mag alleen cijfers gebruiken voor aantal eenheden"));
+        Validation.Add("Ean",
+        Validator.StringLength(
+            maxLength: 50,
+            minLength: 1,
+            errorMessage: "U mag maximaal 50 tekens gebruiken voor de ean-code"));
+        Validation.Add("Aantal",
+        Validator.StringLength(
+            maxLength: 2,
+            minLength: 1,
+            errorMessage: "U mag maximaal 99 eenheden toevoegen"));
+
+
+
+
         ean = Request.Form["Ean"];
         Product = db.QueryValue(productnaamvanean,ean);
         Aantal = Request.Form["Aantal"];
         Afbeelding = db.QueryValue(afbeeldingvanean,ean);
 
+        if(Validation.IsValid()){
         if(Product == null){Response.Redirect("~/Account/Login");}
         else{
+            
                 var insertCommand = "INSERT INTO Product (Product, Koelkastnr, Afbeelding, Aantal) VALUES(@0, @1, @2, @3)";  
                 db.Execute(insertCommand, Product, decodevanbelang, Afbeelding, Aantal);
                 Response.Redirect("~/Koelkast");
+            
         }
-}
+        }       }
 
 }
 <script type="text/javascript" src="jquery.js"></script>

@@ -53,7 +53,7 @@
                             <form style="margin-top: 15px;" id="logoutForm" action="~/Account/Logout" method="post" class="form-horizontal">
                                 <a class="email Log-btn Email-btn" href="~/Account/Manage" title="Manage">@WebSecurity.CurrentUserName</a> 
                                 @AntiForgery.GetHtml()
-                                    <a class="Log-btn" href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
+                                    <a class="Log-btn" href="javascript:document.getElementById('logoutForm').submit()">Uitloggen</a>
                             </form>
                         }
                         else
@@ -61,12 +61,12 @@
                             <form method="post" action="~/Account/Login" class="navbar-form navbar-right">
                                 @AntiForgery.GetHtml()
                                 <div class="form-group">
-                                    <input type="text" name="email" placeholder="Email" class="form-control">
+                                    <input type="text" name="email" placeholder="emailadres" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password" placeholder="Password" class="form-control">
+                                    <input type="password" name="password" placeholder="wachtwoord" class="form-control">
                                 </div>
-                                <button type="submit" class="Log-btn">Sign in</button>
+                                <button type="submit" class="Log-btn">Inloggen</button>
                             </form>
                         }
                     </li>
