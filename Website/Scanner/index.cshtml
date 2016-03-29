@@ -2,7 +2,7 @@
    if (!WebSecurity.IsAuthenticated){Response.Redirect("~/Account/Login");}
     Layout = "~/_SiteLayout.cshtml";
     
-    var ean = "";
+    var Ean = "";
     var Product = "";
     var Aantal = "";
     var Afbeelding = "";
@@ -36,13 +36,13 @@
 
 
 
-        ean = Request.Form["Ean"];
-        Product = db.QueryValue(productnaamvanean,ean);
+        Ean = Request.Form["Ean"];
+        Product = db.QueryValue(productnaamvanean, Ean);
         Aantal = Request.Form["Aantal"];
-        Afbeelding = db.QueryValue(afbeeldingvanean,ean);
+        Afbeelding = db.QueryValue(afbeeldingvanean, Ean);
 
         if(Validation.IsValid()){
-        if(Product == null || Product.IsEmpty()){Response.Redirect("~/ProductAdd");}
+        if(Product == null || Product.IsEmpty()){Response.Redirect("~/ProductAdd?EanId="+Ean);}
 
         else{
             
@@ -95,7 +95,7 @@ var sound = new Audio("barcode.wav");
     <fieldset>
       <legend>Productinformatie</legend>
       <p><label for="ean">Ean Code:</label>
-        <input class="Forms" type="text" name="Ean" value="@ean"/></p>
+        <input class="Forms" type="text" name="Ean" value="@Ean"/></p>
       <p><label for="Aantal">Aantal:</label>
          <input class="Forms" type="text" name="Aantal" value="@Aantal"/></p>
       <p><input type="submit" class="Submit-btn" name="buttonSubmit" value="Toevoegen"/></p>

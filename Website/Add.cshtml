@@ -1,5 +1,9 @@
 ﻿@{
-    if (!WebSecurity.IsAuthenticated){Response.Redirect("~/Account/login");}
+    if (!WebSecurity.IsAuthenticated)
+    {
+        Response.Redirect("~/Account/login");
+    }
+
     Layout = "~/_SiteLayout.cshtml";
     Page.Title = "Voeg een product toe";
     
@@ -41,7 +45,7 @@
             }
             else if (Request.Form["Afbeelding"].IsEmpty())
             {
-                Afbeelding = map + Product + ".jpg";
+                Afbeelding = map + "Default.png";
             }
             else
             {

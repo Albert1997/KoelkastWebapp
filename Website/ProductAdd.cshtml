@@ -1,14 +1,33 @@
 ﻿@{
-    if (!WebSecurity.IsAuthenticated){Response.Redirect("~/Account/login");}
+    if (!WebSecurity.IsAuthenticated)
+    {
+        Response.Redirect("~/Account/login");
+    }
+
     Layout = "~/_SiteLayout.cshtml";
     Page.Title = "Voeg een product toe";
     
+    var Email = WebSecurity.CurrentUserName;
     var Ean = "";
     var Product = "";
     var Afbeelding = "";
+    var Aantal = "1";
+    var Hoeveelheid = "Per stuk";
+
     string map = "/Images/Productafbeeldingen/";
     var db = Database.Open("StarterSite");
+    var codevanuser = "SELECT Koelkastnr FROM Userprofile WHERE LOWER(Email) = LOWER(@0)";
+    if(Email == ""){Response.Redirect("~/Account/Login");};
+    var decodevanbelang = db.QueryValue(codevanuser, Email);
 
+     if(!IsPost)
+     {
+        if(!Request.QueryString["EanId"].IsEmpty() && Request.QueryString["EanId"].IsInt())
+        {
+            Ean = Request.QueryString["EanId"];
+        }
+      }
+      
     if(IsPost){
         @*Validation.RequireField("Product", "Je moet een product naam kiezen");
         Validation.RequireField("Aantal", "Kies een Aantal");
@@ -25,8 +44,8 @@
             minLength: 1,
             errorMessage: "U mag maximaal 99 eenheden toevoegen"));*@
         
-
-            Product = Request.Form["Ean"];
+            
+            Ean = Request.Form["Ean"];
             Product = Request.Form["Product"];
             if(Functions.CheckURLValid(Request.Form["Afbeelding"]))
             {
@@ -34,7 +53,7 @@
             }
             else if (Request.Form["Afbeelding"].IsEmpty())
             {
-                Afbeelding = map + Product + ".jpg";
+                Afbeelding = map + "Default.png";
             }
             else
             {
@@ -43,11 +62,12 @@
 
         if(Validation.IsValid()){
 
-            
-            var insertCommand = "INSERT INTO Ean (EanId, Productnaam, Afbeelding) VALUES(@0, @1, @2)";
-            
+            var insertEan = "INSERT INTO Ean (EanId, Productnaam, Afbeelding) VALUES(@0, @1, @2)";
+            var insertProduct = "INSERT INTO Product (Product, Koelkastnr, Aantal, Afbeelding, Hoeveelheid) VALUES(@0, @1, @2, @3, @4)";
 
-            db.Execute(insertCommand, Ean, Product, Afbeelding);
+
+            db.Execute(insertEan, Ean, Product, Afbeelding);
+            db.Execute(insertProduct, Product, decodevanbelang, Aantal, Afbeelding, Hoeveelheid);
             Response.Redirect("~/Koelkast");
         }
     }
@@ -73,3 +93,5 @@
     </fieldset>
   </form>
   <a class="Link-btn" href="~/Koelkast"><p class="Submit-btn">Terug</p></a>
+
+
