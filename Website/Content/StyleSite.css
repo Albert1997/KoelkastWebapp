@@ -26,19 +26,40 @@ select {
     color: white;
 } 
 
-
-.homepagina {
+/*Homepage-Divs*/
+.Div-Home-60{
+    width: 59%;
     color: #fff;
-    padding: 5px;
-    font-size: 20px; 
+    padding: 20px;
+    font-size: 18px; 
     border: none;
-    box-shadow: 0 6px 8px grey;
-    border-radius: 0 0 10px 10px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+    box-shadow: none;
+    border-radius: 10px;
     background-color: #28B3B2;
+    float: left;
+    transition: box-shadow 0.4s;
+}
+
+.Div-Home-60:hover {
+    box-shadow: 2px 5px 10px grey;
+}
+
+.Div-Home-40{
+    width: 40%;
+    color: #fff;
+    padding: 20px;
+    font-size: 18px; 
+    border: 1px solid rgba(128, 128, 128, 0.6);
+    box-shadow: none;
+    border-radius: 10px;
+    float: right;
+    transition: box-shadow 0.4s;
+    margin-left: 1%;
+    color: black;
+}
+
+.Div-Home-40:hover {
+    box-shadow: 2px 5px 10px grey;
 }
 
 /*Div for deleting items*/
