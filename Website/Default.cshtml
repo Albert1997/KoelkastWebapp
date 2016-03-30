@@ -14,9 +14,8 @@
 
         <h1>@Page.Title</h1>
         <br>
-        <div class="homepagina">
-            
-
+        <div class="Home-div" style="border: 1px solid black; display: inline-block;">
+        <div class="Div-Home-60">
             <p>
             Bent u nieuw hier? Klik dan op registreer. 
             Heeft u al een account? Log dan in. 
@@ -28,10 +27,48 @@
             U kunt vanaf nu eenvoudig checken in de supermarkt of een bepaald product in uw koelkast is. 
             U kunt niet alleen bijhouden wat er in uw koelkast is, maar u kunt ook de hoeveelheid voor elk gewenst product bijhouden. 
             </p>
+            <br>
+        </div>
+        <div class="Div-Home-40">
+            @*<p>
+                Jaaaaa
+            </p>
+            <a class="Link-btn" href="~/Account/Register"><p class="Submit-btn">Heeft u nog geen account?</p></a>
+            <a class="Link-btn" href="~/Account/Login"><p class="Submit-btn">Klik hier om in te loggen</p></a>*@
+                <form method="post">
+        @AntiForgery.GetHtml()
+        @* If at least one validation error exists, notify the user *@
+        @Html.ValidationSummary("Het creëeren van een account is mislukt, corrigeer de errors en probeer opnieuw.", excludeFieldErrors: true, htmlAttributes: null)
+
+        <fieldset>
+
+            <div class="form-group">
+                <label for="email" @if(!ModelState.IsValidField("email")){<text> class="error-label" </text>  }>Gebruikersnaam</label>
+                <input type="text" id="email" name="email" value="" class="form-control" />
+                @* Write any email validation errors to the page *@
+                @Html.ValidationMessage("email")
+            </div>
+            <div class="form-group">
+                <label for="password" @if(!ModelState.IsValidField("password")) {<text> class="error-label" </text>  }>Wachtwoord</label>
+                <input type="password" id="password" name="password" class="form-control" />
+                @* Write any password validation errors to the page *@
+                @Html.ValidationMessage("password")
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword" @if(!ModelState.IsValidField("confirmPassword")) {<text> class="error-label" </text>  }>Bevestig wachtwoord</label>
+                <input type="password" id="confirmPassword" name="confirmPassword"  class="form-control" />
+                @* Write any password validation errors to the page *@
+                @Html.ValidationMessage("confirmPassword")
+            </div>
+
+            <button type="submit" class="Submit-btn">Registreer</button>
+        </fieldset>
+    </form>
         </div>
         <br>
         <br>
-            <img src="~/Images/Koelkast-HomePage.jpg" alt="koelkast" id="HomePage-img"></img>
+            @*<img src="~/Images/Koelkast-HomePage.jpg" alt="koelkast" id="HomePage-img"></img>*@
+        </div>
     </section>
 }
 
