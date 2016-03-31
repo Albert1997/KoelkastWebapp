@@ -1,23 +1,104 @@
 ﻿@{
-    if (!WebSecurity.IsAuthenticated){Response.Redirect("~/Account/login");}
+    if (!WebSecurity.IsAuthenticated) { Response.Redirect("~/Account/login"); }
     Layout = "~/_SiteLayout.cshtml";
     Page.Title = "Deel hier uw koelkast";
 
     var Koelkastnr = "";
-    var delen = false;
+
+
+
+    bool delen = false;
     var Email = WebSecurity.CurrentUserName;
     var db = Database.Open("StarterSite");
-    var codevanuser = "SELECT Koelkastnr FROM Userprofile WHERE LOWER(Email) = LOWER(@0)";
-    if(Email == ""){Response.Redirect("~/Account/Login");};
+    var codevanuser = "SELECT Koelkastnr FROM UserProfile WHERE LOWER(Email) = LOWER(@0)";
+    if (Email == "") { Response.Redirect("~/Account/Login"); };
+
+    var gastnummer = "";
+    gastnummer = Request.Form["Koelkastnr"];
+
+
+    var user = WebSecurity.CurrentUserId;
+
+    string result;
+
+
+    var deelbaarheid = "SELECT Delen FROM UserProfile WHERE Koelkastnr=@0 AND UserId != @1";
+    if (!gastnummer.IsEmpty())
+    {
+        result = db.QueryValue(deelbaarheid, gastnummer, user);
+    }
+    else
+    {
+        result = db.QueryValue(codevanuser, Email);
+    }
+
+    var prullenbak = "SELECT Email FROM UserProfile WHERE Koelkastnr=@0 AND UserId != @1";
+    string gebruikerzonderkoelkast = db.QueryValue(prullenbak, gastnummer, user);
+
+    var eigenkoelkastnr = "SELECT Koelkastnr FROM UserProfile WHERE UserId=@1";
+    string huidigekoelkast = db.QueryValue(eigenkoelkastnr, gastnummer, user);
+
+
+    if (IsPost)
+    {
+        Validation.RequireField("Koelkastnr", "Je moet een koelkastnr kiezen");
+        Validation.Add("Koelkastnr", Validator.Integer("U mag alleen cijfers gebruiken voor het koelkastnummer"));
+        Validation.Add("Koelkastnr",
+        Validator.StringLength(
+            maxLength: 6,
+            minLength: 6,
+            errorMessage: "U moet 6 tekens gebruiken"));
+
+
+
+
+
+        Koelkastnr = Request.Form["Koelkastnr"];
+        delen = Convert.ToBoolean(Request.Form["delen"]);
+
+        if (Validation.IsValid())
+        {
+            if (result == "True" || gebruikerzonderkoelkast.IsEmpty() || huidigekoelkast == Koelkastnr) {
+                if (delen == true)
+                {
+                    var updateCommand = "UPDATE UserProfile SET Koelkastnr=@0, Delen=@1 WHERE UserId = @2 OR Koelkastnr =@0";
+                    db.Execute(updateCommand, Koelkastnr, Convert.ToString(delen), user);
+                    Response.Redirect("~/Koelkast");
+                }
+
+                if (delen == false)
+                {
+                    var updateCommand = "UPDATE UserProfile SET Koelkastnr=@0, Delen=@1 WHERE UserId = @2 OR Koelkastnr =@0";
+                    db.Execute(updateCommand, Koelkastnr, Convert.ToString(delen), user);
+                    Response.Redirect("~/Koelkast");
+                }
+            }
+            else
+            {
+                Response.Write("<script>alert('Koelkast is privé!')</script>");
+            }
+        }
+    }
     var decodevanbelang = db.QueryValue(codevanuser, Email);
 }
 
-
 <h1>Deel hier uw koelkast</h1>
-        
+ @Html.ValidationSummary()
 
-<p><span>Uw Koelkast nummer: </span>
+
+<form method="post">       
+    <fieldset>
+        <p><span>Uw Koelkast nummer: </span>
          <span>@decodevanbelang</span></p>
 
-<input type="checkbox" id="rememberMe" name="rememberMe" value="true" checked="@delen" />
-                    <label class="checkbox" for="rememberMe">Wilt u uw koelkast deelbaar maken?</label>
+
+        <p><label for="Koelkastnr">Koelkast nummer:</label>
+        <input class="Forms" type="text" name="Koelkastnr" value="@Koelkastnr" /></p>
+
+
+        <label class="checkbox" for="delen">Wilt u uw koelkast deelbaar maken?</label>
+        <input type="checkbox" id="delen" name="delen" value="true" checked="checked" />
+        
+        <p><input class="Submit-btn" id="Edit-btn" type="submit" name="buttonSubmit" value="Delen" /></p>
+    </fieldset>
+</form>
