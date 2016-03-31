@@ -45,12 +45,9 @@
         if(Validation.IsValid()){
         if(Product == null || Product.IsEmpty() && !Ean.IsEmpty())
         {
-            Response.Redirect("~/ProductAdd?EanId="+Ean);
-        }
-        else  if (!barcode.isEmpty())
-        {
-            Response.Redirect("~/ProductAdd?EanId="+barcode);
-        }
+            Response.Redirect("~/ProductAdd?EanId="+Ean);        }
+
+
         else{
             
                 var insertCommand = "INSERT INTO Product (Product, Koelkastnr, Afbeelding, Aantal) VALUES(@0, @1, @2, @3)";  
@@ -89,9 +86,7 @@
 
     });
 </script>
-@{ 
-    var barcode =  ("input[name=Ean]").attr("value", barcode);
-}
+
 
 <div id="barcode">
   <video id="barcodevideo" autoplay></video>
