@@ -36,12 +36,14 @@
             minLength: 1,
             errorMessage: "U mag maximaal 99 eenheden toevoegen"));
         
-
+            
             Product = Request.Form["Product"];
             Aantal = Request.Form["Aantal"];
-            if(Functions.CheckURLValid(Request.Form["Afbeelding"]))
+            string plaatje = Product + ".jpg";
+
+            if (map.Contains(plaatje))
             {
-                Afbeelding = Request.Form["Afbeelding"];
+                Afbeelding = map + plaatje;
             }
             else if (Request.Form["Afbeelding"].IsEmpty())
             {
@@ -49,8 +51,21 @@
             }
             else
             {
-                Afbeelding = map + Request.Form["Afbeelding"];
+                Afbeelding = Request.Form["Afbeelding"];
             }
+
+            //if(Functions.CheckURLValid(Request.Form["Afbeelding"]))
+            //{
+            //    Afbeelding = Request.Form["Afbeelding"];
+            //}
+            //else if (Request.Form["Afbeelding"].IsEmpty())
+            //{
+            //    Afbeelding = map + "Default.png";
+            //}
+            //else
+            //{
+            //    Afbeelding = map + Request.Form["Afbeelding"];
+            //}
             Hoeveelheid = Request.Form["Hoeveelheid"];
 
         if(Validation.IsValid()){

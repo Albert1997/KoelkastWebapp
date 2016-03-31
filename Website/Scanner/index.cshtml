@@ -47,10 +47,6 @@
         {
             Response.Redirect("~/ProductAdd?EanId="+Ean);
         }
-        else  if (!barcode.isEmpty())
-        {
-            Response.Redirect("~/ProductAdd?EanId="+barcode);
-        }
         else{
             
                 var insertCommand = "INSERT INTO Product (Product, Koelkastnr, Afbeelding, Aantal) VALUES(@0, @1, @2, @3)";  
@@ -89,9 +85,6 @@
 
     });
 </script>
-@{ 
-    var barcode =  ("input[name=Ean]").attr("value", barcode);
-}
 
 <div id="barcode">
   <video id="barcodevideo" autoplay></video>

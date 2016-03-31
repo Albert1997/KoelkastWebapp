@@ -52,6 +52,7 @@ select {
     border-radius: 10px;
     transition: box-shadow 0.4s;
     color: black;
+    text-align: center;
 }
 
 .Div-Home-40:hover {
@@ -210,12 +211,20 @@ label:hover:before {
 
 #barcode {
   position: relative;
+  width: 640px;
+  margin: 0 auto;
 }  
 
 #barcodecanvas {
   display: none;
 }
 
+/*Mobile barcode scanner*/
+@media (max-width: 767px) {
+    #barcode {
+    display: none;
+}
+}
 
 /*Responsive h1*/
 @media (max-width: 767px) {
