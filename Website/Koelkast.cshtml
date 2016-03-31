@@ -7,7 +7,7 @@
     {
       Response.Redirect("~/Account/Login");
     }  
-     
+    var aantal = 0; 
     var searchTerm = "";
     var Email = WebSecurity.CurrentUserName;
     var db = Database.Open("StarterSite");
@@ -46,11 +46,18 @@
         if (action == "MinProduct" &&
             Request.Form["productId"].IsInt())
         {    
-            var ProductID = Request.Form["productid"];
+            var idproduct = Request.Form["productid"];
             var countplus = Convert.ToInt32(Request.Form["aantal"]) - 1;
+                if (countplus < 1){       
+                    var ProductID = Request.Form["productid"];
+                    var deleteCommand = "DELETE FROM Product WHERE ProductID = @0";
+                    db.Execute(deleteCommand, idproduct);
+                    Response.Redirect("~/Koelkast");}
+            else{
             var updateCommand = "UPDATE Product SET Aantal=@0 WHERE ProductID=@1";
-            db.Execute(updateCommand, countplus, ProductID);
+            db.Execute(updateCommand, countplus, idproduct);}
         }
+
     }
    
     //var dataSelected = db.Query(selectCommands, searchTerm);

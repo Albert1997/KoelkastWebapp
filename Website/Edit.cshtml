@@ -58,9 +58,9 @@
             {
                 Afbeelding = Request.Form["Afbeelding"];
             }
-            else if (Request.Form["Afbeelding"].Contains(map))
+            else if (Request.Form["Afbeelding"].IsEmpty())
             {
-                Afbeelding = Request.Form["Afbeelding"];
+                Afbeelding = map + "Default.png";
             }
             else
             {

@@ -7,21 +7,29 @@
     Layout = "~/_SiteLayout.cshtml";
     Page.Title = "Voeg een product toe";
     
-    var Product = "";
-    var Aantal = "";
-    var Afbeelding = "";
-    var Hoeveelheid = "";
-
     var Email = WebSecurity.CurrentUserName;
+    var Ean = "";
+    var Product = "";
+    var Afbeelding = "";
+    var Aantal = "1";
+    var Hoeveelheid = "Per stuk";
+
+    string map = "/Images/Productafbeeldingen/";
     var db = Database.Open("StarterSite");
     var codevanuser = "SELECT Koelkastnr FROM Userprofile WHERE LOWER(Email) = LOWER(@0)";
     if(Email == ""){Response.Redirect("~/Account/Login");};
     var decodevanbelang = db.QueryValue(codevanuser, Email);
-    string map = "/Images/Productafbeeldingen/";
 
-
+     if(!IsPost)
+     {
+        if(!Request.QueryString["EanId"].IsEmpty() && Request.QueryString["EanId"].IsInt())
+        {
+            Ean = Request.QueryString["EanId"];
+        }
+      }
+      
     if(IsPost){
-        Validation.RequireField("Product", "Je moet een product naam kiezen");
+        @*Validation.RequireField("Product", "Je moet een product naam kiezen");
         Validation.RequireField("Aantal", "Kies een Aantal");
         Validation.Add("Aantal", Validator.Integer("U mag alleen cijfers gebruiken voor aantal eenheden"));
         Validation.RequireField("Hoeveelheid", "Kies een Hoeveelheid");
@@ -34,11 +42,11 @@
         Validator.StringLength(
             maxLength: 2,
             minLength: 1,
-            errorMessage: "U mag maximaal 99 eenheden toevoegen"));
+            errorMessage: "U mag maximaal 99 eenheden toevoegen"));*@
         
-
+            
+            Ean = Request.Form["Ean"];
             Product = Request.Form["Product"];
-            Aantal = Request.Form["Aantal"];
             if(Functions.CheckURLValid(Request.Form["Afbeelding"]))
             {
                 Afbeelding = Request.Form["Afbeelding"];
@@ -49,17 +57,17 @@
             }
             else
             {
-                Afbeelding = map + Request.Form["Afbeelding"];
+                Afbeelding = map + Request.Form["Afbeelding"] + ".jpg";
             }
-            Hoeveelheid = Request.Form["Hoeveelheid"];
 
         if(Validation.IsValid()){
 
-            
-            var insertCommand = "INSERT INTO Product (Product, Koelkastnr, Aantal, Afbeelding, Hoeveelheid) VALUES(@0, @1, @2, @3, @4)";
-            
+            var insertEan = "INSERT INTO Ean (EanId, Productnaam, Afbeelding) VALUES(@0, @1, @2)";
+            var insertProduct = "INSERT INTO Product (Product, Koelkastnr, Aantal, Afbeelding, Hoeveelheid) VALUES(@0, @1, @2, @3, @4)";
 
-            db.Execute(insertCommand, Product, decodevanbelang, Aantal, Afbeelding, Hoeveelheid);
+
+            db.Execute(insertEan, Ean, Product, Afbeelding);
+            db.Execute(insertProduct, Product, decodevanbelang, Aantal, Afbeelding, Hoeveelheid);
             Response.Redirect("~/Koelkast");
         }
     }
@@ -72,24 +80,18 @@
     <fieldset>
       <legend>Product</legend>
 
+      <p><label for="Ean">Ean:</label>
+         <input class="Forms" type="text" name="Ean" value="@Ean" /></p>
+        
       <p><label for="Product">Product:</label>
          <input class="Forms" type="text" name="Product" value="@Product" /></p>
         
-      <p><label for="Aantal">Aantal:</label>
-         <input class="Forms" type="text" name="Aantal" value="@Aantal" /></p>
-        
       <p><label for="Afbeelding">Afbeelding:</label>
          <input class="Forms" type="text" name="Afbeelding" value="@Afbeelding" /></p>
-
-        <p><label for="Hoeveelheid">Hoeveelheid:</label>
-        <select name="Hoeveelheid">
-            <option selected="selected" value="Per stuk">Per stuk</option>
-            <option value="Per verpakking">Per verpakking</option>
-            <option value="Per 100 gr">Per 100 gr</option>
-            <option value="per 1000 gr">per 1000 gr</option>
-        </select>
 
       <p><input type="submit" class="Submit-btn" name="buttonSubmit" value="Toevoegen" /></p>
     </fieldset>
   </form>
   <a class="Link-btn" href="~/Koelkast"><p class="Submit-btn">Terug</p></a>
+
+

@@ -2,9 +2,9 @@
    if (!WebSecurity.IsAuthenticated){Response.Redirect("~/Account/Login");}
     Layout = "~/_SiteLayout.cshtml";
     
-    var ean = "";
+    var Ean = "";
     var Product = "";
-    var Aantal = "";
+    var Aantal = "1";
     var Afbeelding = "";
     
 
@@ -13,14 +13,13 @@
         var Email = WebSecurity.CurrentUserName;
         var codevanuser = "SELECT Koelkastnr FROM Userprofile WHERE LOWER(Email) = LOWER(@0)";
         var decodevanbelang = db.QueryValue(codevanuser, Email);
-
         var productnaamvanean = "SELECT Productnaam FROM Ean WHERE EanId = @0";
-        var afbeeldingvanean = "SELECT Productnaam FROM Ean WHERE EanId = @0";
+        var afbeeldingvanean = "SELECT Afbeelding FROM Ean WHERE EanId = @0";
   
     if(IsPost)
     {
         Validation.RequireField("Ean", "Je moet een ean-code invoeren");
-        Validation.Add("Ean", Validator.Integer("U mag alleen cijfers gebruiken voor de ean-code"));
+        Validation.Add("Ean", Validator.Decimal("U mag alleen cijfers gebruiken voor de ean-code"));
         Validation.RequireField("Aantal", "Kies een Aantal");
         Validation.Add("Aantal", Validator.Integer("U mag alleen cijfers gebruiken voor aantal eenheden"));
         Validation.Add("Ean",
@@ -37,49 +36,66 @@
 
 
 
-        ean = Request.Form["Ean"];
-        Product = db.QueryValue(productnaamvanean,ean);
+        Ean = Request.Form["Ean"];
+        Product = db.QueryValue(productnaamvanean, Ean);
         Aantal = Request.Form["Aantal"];
-        Afbeelding = db.QueryValue(afbeeldingvanean,ean);
+        Afbeelding = db.QueryValue(afbeeldingvanean, Ean);
 
+        
         if(Validation.IsValid()){
-        if(Product == null){Response.Redirect("~/Account/Login");}
+        if(Product == null || Product.IsEmpty() && !Ean.IsEmpty())
+        {
+            Response.Redirect("~/ProductAdd?EanId="+Ean);
+        }
+        else  if (!barcode.isEmpty())
+        {
+            Response.Redirect("~/ProductAdd?EanId="+barcode);
+        }
         else{
             
                 var insertCommand = "INSERT INTO Product (Product, Koelkastnr, Afbeelding, Aantal) VALUES(@0, @1, @2, @3)";  
                 db.Execute(insertCommand, Product, decodevanbelang, Afbeelding, Aantal);
                 Response.Redirect("~/Koelkast");
-            
-}
-        }       }
 
+        }
+    }
+           
 }
+}              
+
+
+
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="barcode.js"></script>
 <script type="text/javascript">
-var sound = new Audio("barcode.wav");
+    var sound = new Audio("barcode.wav");
 
     $(document).ready(function () {
-	barcode.config.start = 0.2;
-	barcode.config.end = 0.9;
-	barcode.config.video = '#barcodevideo';
-	barcode.config.canvas = '#barcodecanvas';
-	barcode.config.canvasg = '#barcodecanvasg';
+        barcode.config.start = 0.2;
+        barcode.config.end = 0.9;
+        barcode.config.video = '#barcodevideo';
+        barcode.config.canvas = '#barcodecanvas';
+        barcode.config.canvasg = '#barcodecanvasg';
         barcode.setHandler(function (barcode) {
             //$('#result').html(barcode);
             $("input[name=Ean]").attr("value", barcode);
-	});
-	barcode.init();
+            { sound.play(); }
+        });
+        barcode.init();
 
         $('#result').bind('DOMSubtreeModified', function (e) {
-		sound.play();	
-	});
-});
+
+        });
+
+    });
 </script>
+@{ 
+    var barcode =  ("input[name=Ean]").attr("value", barcode);
+}
 
 <div id="barcode">
-	<video id="barcodevideo" autoplay></video>
-	<canvas id="barcodecanvasg" ></canvas>
+  <video id="barcodevideo" autoplay></video>
+  <canvas id="barcodecanvasg" ></canvas>
 </div>
 <canvas id="barcodecanvas" ></canvas>
 <div id="result"></div>
@@ -90,7 +106,7 @@ var sound = new Audio("barcode.wav");
     <fieldset>
       <legend>Productinformatie</legend>
       <p><label for="ean">Ean Code:</label>
-        <input class="Forms" type="text" name="Ean" value="@ean"/></p>
+        <input class="Forms" type="text" name="Ean" value="@Ean"/></p>
       <p><label for="Aantal">Aantal:</label>
          <input class="Forms" type="text" name="Aantal" value="@Aantal"/></p>
       <p><input type="submit" class="Submit-btn" name="buttonSubmit" value="Toevoegen"/></p>
